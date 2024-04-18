@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+###############################################################################
+# Enable Dark Mode - explorer must be restarted                               #
+# Show File Extensions  - explorer must be restarted                          #
+###############################################################################
+
+properties:
+  configurationVersion: 0.2.0
+  resources:
+   - resource: Microsoft.Windows.Developer/EnableDarkMode
+     id: DarkMode
+     directives:
+       description: Enable Dark Mode
+       allowPrerelease: true
+     settings:
+       Ensure: Present
+       RestartExplorer: true

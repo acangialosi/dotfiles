@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+#
+# This DSC config file will format a 50 Gb Dev Drive volume onto Disk 0. It must be run with admin credentials 
+# If there is no unallocated space the Disk dsc resource will attempt to resize the first volume that can be resized (shrinked)
+# safely to create the unallocated space. A new hard partition will be created from this unallocated space and a new Dev Drive volume
+# will be formatted into this new hard partition. Note: the AllowDestructive flag is used to signal to the disk dsc resource that if 
+# it needs to resize an existing partition, it can do so. The disk resource also takes a flag called 'ClearDisk', Its important that
+# you do not combine the usage of 'AllowDestructive' and 'ClearDisk' as this will clear the entire disk including pre-existing volumes.
+# The 'AllowDestructive' flag should only be used when you do not know if there is already pre-existing unallocated space on 
+# the machine. E.g when running the config file on different machines. Use either Dev Home's machine configuration page
+# (admin option) or Winget Configure <path to this file> to run the config in an admin terminal window.
+#
+# See https://github.com/dsccommunity/StorageDsc/wiki/Disk for details about the parameters for the Disk resource.
+#
+properties:
+    configurationVersion: '0.2.0'
+    resources:
+        # Creates a new Dev Drive volume with Drive letter 'Z' and label 'Dev Drive 1' onto disk 0
+        - resource: Disk
+          id: DevDrive1
+          directives:
+            description: 'Format a new Dev Drive volume onto Disk 0'
+            module: StorageDsc
+            allowPrerelease: true
+          settings:
+            DiskId: '0'
+            DiskIdType: 'Number'
+            DriveLetter: 'Z'
+            FSLabel: 'Dev Drive 1'
+            DevDrive: true
+            AllowDestructive: true
+            FSFormat: 'ReFS'
+            Size: '50Gb'

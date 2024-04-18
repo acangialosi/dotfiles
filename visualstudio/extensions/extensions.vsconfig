@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "components": [
+
+  ],
+  "extensions": [
+    "https://marketplace.visualstudio.com/items?itemName=VisualStudioPlatformTeam.ProductivityPowerPack2022",
+    "https://marketplace.visualstudio.com/items?itemName=MadsKristensen.ColorPreview"
+  ]
+}

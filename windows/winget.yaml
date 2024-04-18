@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+# Reference: https://github.com/microsoft/winget-cli#building-the-client
+
+###############################################################################
+# Show Seconds in Clock                                                       #
+# Left Align Task Bar                                                         #
+# Enable Dark Mode - explorer must be restarted                               #
+# Show File Extensions  - explorer must be restarted                          #
+# Install Git                                                                 #
+# Clone winget-cli                                                            #
+###############################################################################
+
+properties:
+  resources:
+    - resource: Microsoft.Windows.Developer/ShowSecondsInClock
+      id: ShowSeconds
+      directives:
+        description: Show seconds in clock
+        allowPrerelease: true
+      settings:
+        Ensure: Present
+    - resource: Microsoft.Windows.Developer/TaskBarAlignment
+      id: TaskBarOnLeft
+      directives:
+        description: Left Align Task Bar
+        allowPrerelease: true
+      settings:
+        Alignment: Left
+#    - resource: Microsoft.Windows.Developer/EnableDarkMode
+#      id: DarkMode
+#      directives:
+#        description: Enable Dark Mode
+#        allowPrerelease: true
+#      settings:
+#        Ensure: Present
+#    - resource: Microsoft.Windows.Developer/HideFileExtensions
+#      directives:
+#        description: Hide File Extensions
+#        allowPrerelease: true
+#      settings:
+#        Ensure: Absent
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Git
+      directives:
+        description: Install Git
+        allowPrerelease: true
+      settings:
+        id: Git.Git
+        source: winget
+    - resource: GitDsc/GitClone
+      dependsOn:
+        - Git
+      directives:
+        description: Clone WinGet CLI GitHub repository
+        allowPrerelease: true
+      settings:
+        HttpsUrl: https://github.com/microsoft/winget-cli
+        RootDirectory: D:\GitHub
+        Ensure: Present
+  configurationVersion: 0.2.0

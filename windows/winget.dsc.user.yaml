@@ -1,0 +1,81 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+###############################################################################
+# Enable Dark Mode - explorer must be restarted                               #
+# Show File Extensions  - explorer must be restarted                          #
+###############################################################################
+
+properties:
+  configurationVersion: 0.2.0
+  resources:
+   - resource: Microsoft.Windows.Developer/EnableDarkMode
+     id: DarkMode
+     directives:
+       description: Enable Dark Mode
+       allowPrerelease: true
+     settings:
+       Ensure: Present
+       RestartExplorer: true
+   - resource: Microsoft.Windows.Developer/HideFileExtensions
+     directives:
+       description: Hide File Extensions
+       allowPrerelease: true
+     settings:
+       Ensure: Absent
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: RDClient
+     directives:
+       description: Install RD Client
+       allowPrerelease: true
+     settings:
+       id: Microsoft.RemoteDesktopClient
+       source: winget
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: OMP
+     directives:
+       description: Install Oh My Posh
+       allowPrerelease: true
+     settings:
+       id: JanDeDobbeleer.OhMyPosh
+       source: winget
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: Azd
+     directives:
+       description: Install Azd
+       allowPrerelease: true
+     settings:
+       id: Microsoft.Azd
+       source: winget
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: Fiddler
+     directives:
+       description: Install Fiddler
+       allowPrerelease: true
+     settings:
+       id: Telerik.Fiddler.Classic
+       source: winget
+   - resource: Microsoft.VisualStudio.DSC/VSComponents
+     directives:
+       description: Install required VS workloads from vsconfig file
+       allowPrerelease: true
+     settings:
+       productId: Microsoft.VisualStudio.Product.Enterprise
+       channelId: VisualStudio.17.Preview
+       VsConfigFile: 'C:\src\dotfiles-ignite\visualstudio\extensions\extensions.vsconfig'
+       includeRecommended: true
+       allowUnsignedExtensions: true
+   - resource: Disk
+     id: DevDrive1
+     directives:
+       description: 'Format a new Dev Drive volume onto Disk 0'
+       module: StorageDsc
+       allowPrerelease: true
+     settings:
+       DiskId: '0'
+       DiskIdType: 'Number'
+       DriveLetter: 'Z'
+       FSLabel: 'Dev Drive 1'
+       DevDrive: true
+       AllowDestructive: true
+       FSFormat: 'ReFS'
+       Size: '50Gb'
