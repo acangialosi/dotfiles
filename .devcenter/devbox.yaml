@@ -1,8 +1,4 @@
 setupTasks:
-  - task: git-clone
-    inputs:
-      repositoryUrl: 'https://github.com/acangialosi/dotfiles-ignite'
-      directory: 'c:\src'
   - task: powershell
     inputs:
       command: 'git config --global user.name ''Your Name Here'' && git config --global user.email your@email.example'
@@ -10,10 +6,6 @@ setupTasks:
   - task: winget
     inputs:
       package: 'JanDeDobbeleer.OhMyPosh'
-      runAsUser: true
-  - task: winget
-    inputs:
-      configurationFile: 'C:\src\dotfiles-ignite\windows\winget.dsc.user.yaml'
       runAsUser: true
   - task: powershell
     inputs:

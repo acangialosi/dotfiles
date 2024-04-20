@@ -1,5 +1,6 @@
 # yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
 properties:
+  configurationVersion: 0.2.0
   ########################################
   ### ASSERTIONS: System Requirements
   ########################################
@@ -35,5 +36,3 @@ properties:
       settings:
         name: Microsoft-Windows-Subsystem-Linux
         ensure: Present
-
-  configurationVersion: 0.2.0

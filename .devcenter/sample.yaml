@@ -1,8 +1,0 @@
-setupTasks:
-  - task: Winget
-    inputs:
-      package: 'Telerik.Fiddler.Classic'
-      runAsUser: true
-  - task: choco
-    inputs:
-      package: nodejs

@@ -1,0 +1,12 @@
+properties:
+    configurationVersion: '0.2.0'
+    resources:
+    ### Show file extensions and hidden files
+    ### -------------------------------------
+    - resource: Microsoft.Windows.Developer/WindowsExplorer
+      directives:
+        description: Show File Extensions
+        allowPrerelease: true
+      settings:
+        FileExtensions: Show  # Hide
+        HiddenFiles: Show # Hide

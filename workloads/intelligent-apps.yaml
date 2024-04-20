@@ -18,47 +18,6 @@ properties:
   ### RESOURCES: System Configuration
   ########################################
   resources:
-    ### Enable: Developer Mode
-    ### -------------------------------------
-    - resource: Microsoft.Windows.Developer/DeveloperMode
-      directives:
-        description: Enable Developer Mode
-        allowPrerelease: true
-      settings:
-        Ensure: Present
-
-    ### Show file extensions
-    ### -------------------------------------
-    - resource: Microsoft.Windows.Developer/WindowsExplorer
-      directives:
-        description: Show File Extensions
-        allowPrerelease: true
-      settings:
-        FileExtensions: Show  # Hide
-        HiddenFiles: Show # Hide
-
-    ### Install Powershell
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: powershell
-      directives:
-        description: Install Powershell
-        allowPrerelease: true
-      settings:
-        id: Microsoft.PowerShell
-        source: winget
-
-    ### Install Git
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: git
-      directives:
-        description: Install Git
-        allowPrerelease: true
-      settings:
-        id: Git.Git
-        source: winget
-
     ### Install Node.js
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
