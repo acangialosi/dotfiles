@@ -135,7 +135,7 @@ properties:
        allowPrerelease: true
      settings:
        id: Axosoft.GitKraken
-   ### Install Microsoft Visual Studio Code
+   ### Install Visual Studio Code
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
      id: vscode
@@ -145,6 +145,15 @@ properties:
      settings:
        id: Microsoft.VisualStudioCode
        ensure: Present
+   ### Install Visual Sudio
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: vsenterprise
+     directives:
+      description: Install Visual Studio 2022 Enterprise
+      allowPrerelease: true
+     settings:
+       id: Microsoft.VisualStudio.2022.Enterprise.Preview
    ### Install VS Workloads
    ### -------------------------------------
    - resource: Microsoft.VisualStudio.DSC/VSComponents
