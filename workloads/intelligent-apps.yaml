@@ -115,7 +115,7 @@ properties:
    ### Install VS Code Extension - MS Python
    ### -------------------------------------
    - resource: PSDscResources/Script
-     id: VSCodemspython
+     id: vscodeextensions
      dependsOn:
        - python311
        - vscode
