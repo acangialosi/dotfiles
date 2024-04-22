@@ -5,24 +5,30 @@
 
 properties:
   configurationVersion: 0.2.0
-  resources:
+  ########################################
+  ### ASSERTIONS: System Requirements
+  ########################################
+  assertions:
+    ### Assertion: Visual Studio 2022
+    ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: vsenterprise
+      id: vs2022
       directives:
-        description: Install Visual Studio 2022 Enterprise
+        description: Minimum Version of Visual Studio installed
         allowPrerelease: true
       settings:
         id: Microsoft.VisualStudio.2022.Enterprise
-        source: winget
+        MinVersion: "10.0.22000"
+  resources:
     - resource: Microsoft.VisualStudio.DSC/VSComponents
       dependsOn:
-        - vsenterprise
+        - vs2022
       directives:
         description: Install required VS workloads from vsconfig file
         allowPrerelease: true
       settings:
         productId: Microsoft.VisualStudio.Product.Enterprise
         channelId: VisualStudio.17.IntPreview
-        VsConfigFile: 'C:\src\dotfiles\visualstudio\extensions\extensions.vsconfig'
+        VsConfigFile: '.\extensions.vsconfig'
         includeRecommended: true
         allowUnsignedExtensions: true
