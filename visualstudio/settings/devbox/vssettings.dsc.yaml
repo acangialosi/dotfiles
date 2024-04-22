@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: 0.2.0
+  resources:
+   ########################################
+   ### Configure settings
+   ########################################
+   ### Configure Visual Studio settings
+   ### -------------------------------------
+   - resource: Environment
+     directives:
+      description: Set Visual Studio Unified Settings Profile environment variable
+     settings:
+      Name: VS_UNIFIED_SETTINGS_PROFILE
+      Value: 'Z:\src\dotfiles\visualstudio\settings\devbox'
+      Ensure: Present

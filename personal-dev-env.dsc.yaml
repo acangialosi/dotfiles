@@ -194,3 +194,12 @@ properties:
          git config --global user.email 5457010+acangialosi@users.noreply.github.com
        GetScript: return $false
        TestScript: return $false
+   ### Configure Visual Studio settings
+   ### -------------------------------------
+   - resource: PSDscResources/Environment
+     directives:
+      description: Set Visual Studio Unified Settings Profile environment variable
+     settings:
+      Name: VS_UNIFIED_SETTINGS_PROFILE
+      Value: '\visualstudio\settings\devbox'
+      Ensure: Present
