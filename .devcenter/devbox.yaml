@@ -1,8 +1,4 @@
 setupTasks:
-  - task: powershell
-    inputs:
-      command: 'git config --global user.name ''Your Name Here'' && git config --global user.email your@email.example'
-      runAsUser: true
   - task: winget
     inputs:
       package: 'JanDeDobbeleer.OhMyPosh'
