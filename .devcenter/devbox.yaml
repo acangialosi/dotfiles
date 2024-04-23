@@ -1,13 +1,12 @@
-setupTasks:
-  - task: git-clone
+$schema: "1.0"
+name: "devbox-customization"
+tasks:
+  - name: git-clone
+    description: Clone this repository into C:\Workspaces
+    parameters:
+      repositoryUrl: https://github.com/acangialosi/dotfiles.git
+      directory: c:\src
+  - name: winget
     inputs:
-      repositoryUrl: 'https://github.com/acangialosi/dotfiles'
-      directory: 'c:\src'
-  - task: winget
-    inputs:
-      configurationFile: 'C:\src\dotfiles\ready-for-me.dsc.yaml'
-      runAsUser: true
-  - task: powershell
-    inputs:
-      command: 'c:\src\dotfiles\setup.ps1'
+      configurationFile: 'c:\src\dotfiles\ready-for-me.dsc.yaml'
       runAsUser: true
