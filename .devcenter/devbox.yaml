@@ -1,9 +1,13 @@
 setupTasks:
+  - task: git-clone
+    inputs:
+      repositoryUrl: 'https://github.com/acangialosi/dotfiles'
+      directory: 'c:\src'
   - task: winget
     inputs:
-      package: 'JanDeDobbeleer.OhMyPosh'
+      configurationFile: 'C:\src\dotfiles\ready-for-me.dsc.yaml'
       runAsUser: true
   - task: powershell
     inputs:
-      command: '& c:\src\dotfiles-ignite\.devcenter\setup-tools.ps1'
+      command: 'c:\src\dotfiles\setup.ps1'
       runAsUser: true
