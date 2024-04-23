@@ -1,12 +1,9 @@
 # yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
-
-###############################################################################
-# Enable Dark Mode - explorer must be restarted                               #
-# Show File Extensions  - explorer must be restarted                          #
-###############################################################################
-
 properties:
   configurationVersion: 0.2.0
+  ########################################
+  ### RESOURCES: System Configuration
+  ########################################
   resources:
    - resource: Microsoft.WinGet.DSC/WinGetPackage
      id: OMP

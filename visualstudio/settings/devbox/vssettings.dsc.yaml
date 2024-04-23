@@ -1,10 +1,10 @@
 # yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
 properties:
   configurationVersion: 0.2.0
+  ########################################
+  ### RESOURCES: System Configuration
+  ########################################
   resources:
-   ########################################
-   ### Configure settings
-   ########################################
    ### Configure Visual Studio settings
    ### -------------------------------------
    - resource: Environment

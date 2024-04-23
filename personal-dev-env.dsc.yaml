@@ -1,10 +1,4 @@
 # yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
-
-###############################################################################
-# Enable Dark Mode - explorer must be restarted                               #
-# Show File Extensions  - explorer must be restarted                          #
-###############################################################################
-
 properties:
   configurationVersion: 0.2.0
   ########################################
@@ -20,6 +14,9 @@ properties:
         allowPrerelease: true
       settings:
         MinVersion: "10.0.22000"
+  ########################################
+  ### RESOURCES: System Configuration
+  ########################################
   resources:
    ########################################
    ### Initialization
@@ -61,7 +58,7 @@ properties:
        allowPrerelease: true
      settings:
        HttpsUrl: https://github.com/acangialosi/dotfiles
-       RootDirectory: Z:\src
+       RootDirectory: z:\src
        Ensure: Present
    ########################################
    ### OS Configurations
@@ -176,7 +173,7 @@ properties:
      settings:
        productId: Microsoft.VisualStudio.Product.Enterprise
        channelId: VisualStudio.17.Preview
-       VsConfigFile: 'c:\src\dotfiles\visualstudio\extensions\extensions.vsconfig'
+       VsConfigFile: 'z:\src\dotfiles\visualstudio\extensions\extensions.vsconfig'
        includeRecommended: true
        allowUnsignedExtensions: true
    ########################################
@@ -196,10 +193,10 @@ properties:
        TestScript: return $false
    ### Configure Visual Studio settings
    ### -------------------------------------
-   - resource: PSDscResources/Environment
+   - resource: Environment
      directives:
       description: Set Visual Studio Unified Settings Profile environment variable
      settings:
       Name: VS_UNIFIED_SETTINGS_PROFILE
-      Value: '\visualstudio\settings\devbox'
+      Value: 'Z:\src\dotfiles\visualstudio\settings\devbox'
       Ensure: Present

@@ -1,5 +1,8 @@
 properties:
     configurationVersion: '0.2.0'
+  ########################################
+  ### RESOURCES: System Configuration
+  ########################################
     resources:
     ### Show file extensions and hidden files
     ### -------------------------------------
