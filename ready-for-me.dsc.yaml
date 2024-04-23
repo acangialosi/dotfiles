@@ -204,3 +204,23 @@ properties:
       Name: VS_UNIFIED_SETTINGS_PROFILE
       Value: 'Z:\src\dotfiles\visualstudio\settings\devbox'
       Ensure: Present
+   ### Install VS Code Extensions
+   ### -------------------------------------
+   - resource: PSDscResources/Script
+     id: vscodeextensions
+     dependsOn:
+       - vscode
+     directives:
+       description: Install Python Extension for VS Code
+     settings:
+       SetScript: |
+         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
+         code --install-extension ms-vscode.powershell
+         code --install-extension ms-dotnettools.csdevkit
+         code --install-extension ms-dotnettools.csharp
+         code --install-extension ms-dotnettools.vscode-dotnet-runtime
+         code --install-extension ms-vscode.vscode-node-azure-pack
+         code --install-extension ms-azuretools.azure-dev
+         code --install-extension undefined_publisher.devbox
+       GetScript: return $false
+       TestScript: return $false

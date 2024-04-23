@@ -95,7 +95,7 @@ properties:
    ### Install Python 3.11
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: python311
+     id: python
      directives:
        description: Install Python 3.11
        allowPrerelease: true
@@ -112,13 +112,16 @@ properties:
      settings:
        id: Microsoft.VisualStudioCode
        ensure: Present
-   ### Install VS Code Extension - MS Python
+   ### Install VS Code Extension
    ### -------------------------------------
    - resource: PSDscResources/Script
      id: vscodeextensions
      dependsOn:
-       - python311
        - vscode
+       - python
+       - bicep
+       - Azd
+       - docker
      directives:
        description: Install Python Extension for VS Code
      settings:
