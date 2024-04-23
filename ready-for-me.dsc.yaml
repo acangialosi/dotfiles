@@ -24,7 +24,7 @@ properties:
    ### Format a new Dev Drive
    ### -------------------------------------
    - resource: Disk
-     id: DevDrive1
+     id: devdrive
      directives:
        description: 'Format a new Dev Drive volume onto Disk 0'
        module: StorageDsc
@@ -50,9 +50,10 @@ properties:
    ### Install Clone dotfiles repository
    ### -------------------------------------
    - resource: GitDsc/GitClone
-     id: clonedotifiles
+     id: mydotifiles
      dependsOn:
        - git
+       - devdrive
      directives:
        description: Clone WinGet CLI GitHub repository
        allowPrerelease: true
@@ -99,7 +100,6 @@ properties:
    ### Set theme to Dark
    ### -------------------------------------
    - resource: Microsoft.Windows.Developer/EnableDarkMode
-     id: DarkMode
      directives:
        description: Set theme to Dark
        allowPrerelease: true
@@ -112,7 +112,6 @@ properties:
    ### Install Powershell
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: powershell
      directives:
        description: Install Powershell
        allowPrerelease: true
@@ -130,7 +129,6 @@ properties:
    ### Install Azd
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: Azd
      directives:
        description: Install Azd
        allowPrerelease: true
@@ -139,7 +137,6 @@ properties:
    ### Install GitKraken
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: gitkraken
      directives:
        description: Install GitKraken
        allowPrerelease: true
@@ -170,6 +167,9 @@ properties:
      directives:
        description: Install required VS workloads from vsconfig file
        allowPrerelease: true
+     dependsOn:
+       - mydotifiles
+       - vsenterprise
      settings:
        productId: Microsoft.VisualStudio.Product.Enterprise
        channelId: VisualStudio.17.Preview
@@ -184,6 +184,8 @@ properties:
    - resource: PSDscResources/Script
      directives:
        description: Configure Git
+     dependsOn:
+       - git
      settings:
        SetScript: |
          $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
@@ -196,6 +198,8 @@ properties:
    - resource: Environment
      directives:
       description: Set Visual Studio Unified Settings Profile environment variable
+     dependsOn:
+       - mydotifiles
      settings:
       Name: VS_UNIFIED_SETTINGS_PROFILE
       Value: 'Z:\src\dotfiles\visualstudio\settings\devbox'
