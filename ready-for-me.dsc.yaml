@@ -109,6 +109,14 @@ properties:
    ########################################
    ### Install CLIs, SDKs & Tools
    ########################################
+   ### Install DevHome
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     directives:
+       description: Install DevHome
+       allowPrerelease: true
+     settings:
+       id: Microsoft.DevHome
    ### Install Powershell
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage

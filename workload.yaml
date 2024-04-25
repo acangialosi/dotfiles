@@ -1,0 +1,7 @@
+$schema: "1.0"
+name: "devbox-customization"
+tasks:
+  - name: winget
+    parameters:
+      configurationFile: 'c:\workspaces\dotfiles\ready-for-me.dsc.yaml'
+      runAsUser: true
