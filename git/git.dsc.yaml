@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: 0.2.0
+  ########################################
+  ### RESOURCES: System Configuration
+  ########################################
+  resources:
+   ########################################
+   ### Initialization
+   ########################################
+   ### Install Git
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: git
+     directives:
+       description: Install Git
+       allowPrerelease: true
+     settings:
+       id: Git.Git
+   ### Configure Git
+   ### -------------------------------------
+#   - resource: PSDscResources/Script
+   - resource: GitDsc/GitConfigUserName
+     directives:
+       description: Configure Git
+     dependsOn:
+       - git
+     settings:
+        UserName: "Anthony Cangialosi [MS]"
+   - resource: GitDsc/GitConfigUserEmail
+     directives:
+       description: Configure Git
+     dependsOn:
+       - git
+     settings:
+        UserEmail: "5457010+acangialosi@users.noreply.github.com"
+   ### Clone dotfiles repository
+   ### -------------------------------------
+   - resource: GitDsc/GitClone
+     id: mydotifiles
+     dependsOn:
+       - git
+     directives:
+       description: Clone WinGet CLI GitHub repository
+       allowPrerelease: true
+     settings:
+       HttpsUrl: https://github.com/acangialosi/dotfiles
+       RootDirectory: c:\src
+       Ensure: Present

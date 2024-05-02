@@ -47,7 +47,7 @@ properties:
        allowPrerelease: true
      settings:
        id: Git.Git
-   ### Install Clone dotfiles repository
+   ### Clone dotfiles repository
    ### -------------------------------------
    - resource: GitDsc/GitClone
      id: mydotifiles
