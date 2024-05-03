@@ -187,20 +187,28 @@ properties:
    ########################################
    ### Configure settings
    ########################################
-   ### Configure Git
+   ### Git Configure Name
    ### -------------------------------------
-   - resource: PSDscResources/Script
+   - resource: GitDsc/GitConfigUserName
      directives:
        description: Configure Git
+       allowPrerelease: true
      dependsOn:
        - git
      settings:
-       SetScript: |
-         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
-         git config --global user.name "Anthony Cangialosi [MS]"
-         git config --global user.email 5457010+acangialosi@users.noreply.github.com
-       GetScript: return $false
-       TestScript: return $false
+        UserName: "Anthony Cangialosi [MS]"
+        ConfigLocation: "Global"
+   ### Git Configure Email
+   ### -------------------------------------
+   - resource: GitDsc/GitConfigUserEmail
+     directives:
+       description: Configure Git
+       allowPrerelease: true
+     dependsOn:
+       - git
+     settings:
+        UserEmail: "5457010+acangialosi@users.noreply.github.com"
+        ConfigLocation: "Global"
    ### Configure Visual Studio settings
    ### -------------------------------------
    - resource: Environment
