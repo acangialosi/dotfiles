@@ -17,23 +17,28 @@ properties:
        allowPrerelease: true
      settings:
        id: Git.Git
-   ### Configure Git
+   ### Git Configure Name
    ### -------------------------------------
-#   - resource: PSDscResources/Script
    - resource: GitDsc/GitConfigUserName
      directives:
        description: Configure Git
+       allowPrerelease: true
      dependsOn:
        - git
      settings:
         UserName: "Anthony Cangialosi [MS]"
+        ConfigLocation: "Global"
+   ### Git Configure Email
+   ### -------------------------------------
    - resource: GitDsc/GitConfigUserEmail
      directives:
        description: Configure Git
+       allowPrerelease: true
      dependsOn:
        - git
      settings:
         UserEmail: "5457010+acangialosi@users.noreply.github.com"
+        ConfigLocation: "Global"
    ### Clone dotfiles repository
    ### -------------------------------------
    - resource: GitDsc/GitClone
