@@ -224,6 +224,7 @@ properties:
        SetScript: |
          $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
          code --install-extension ms-vscode.powershell
+         code --install-extension ms-vscode-remote.remote-containers
          code --install-extension ms-dotnettools.csdevkit
          code --install-extension ms-dotnettools.csharp
          code --install-extension ms-dotnettools.vscode-dotnet-runtime
