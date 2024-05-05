@@ -5,8 +5,8 @@ tasks:
     description: Clone this repository into C:\Workspaces
     parameters:
       repositoryUrl: https://github.com/acangialosi/dotfiles.git
-      directory: c:\workspaces
+      directory: c:\workspace\repos
   - name: winget
     parameters:
-      configurationFile: 'c:\workspaces\dotfiles\ready-for-me.dsc.yaml'
+      configurationFile: 'c:\workspaces\repos\dotfiles\ready-for-me.dsc.yaml'
       runAsUser: true
