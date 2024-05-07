@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: 0.2.0
+  ########################################
+  ### RESOURCES: System Configuration
+  ########################################
+  resources:
+   ### Install Chocolatey
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: choco
+     directives:
+       description: Install Choco
+       allowPrerelease: true
+     settings:
+       id: Chocolatey.Chocolatey
+   ### Choco Install Git
+   ### -------------------------------------
+   - resource: cChocoPackageInstaller
+     directives:
+       description: Choco install git
+       allowPrerelease: true
+     dependsOn:
+       - choco
+     settings:
+        Name: git
