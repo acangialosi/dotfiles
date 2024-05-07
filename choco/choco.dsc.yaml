@@ -16,7 +16,7 @@ properties:
        id: Chocolatey.Chocolatey
    ### Choco Install Git
    ### -------------------------------------
-   - resource: cChocoPackageInstaller
+   - resource: cChoco/cChocoPackageInstaller
      directives:
        description: Choco install git
        allowPrerelease: true
