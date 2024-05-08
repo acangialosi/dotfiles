@@ -7,13 +7,11 @@ properties:
   resources:
    ### Install Chocolatey
    ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
+   - resource: cChoco/cChocoInstaller
      id: choco
      directives:
        description: Install Choco
        allowPrerelease: true
-     settings:
-       id: Chocolatey.Chocolatey
    ### Choco Install Git
    ### -------------------------------------
    - resource: cChoco/cChocoPackageInstaller
