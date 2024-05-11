@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: 0.2.0
+  ########################################
+  ### RESOURCES: System Configuration
+  ########################################
+  resources:
+   ### Install Edge
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: edge
+     directives:
+       description: Install Edge
+     settings:
+       id: Microsoft.Edge
+   - resource: PSDscResources/Registry
+     id: accessibility-insights
+     directives:
+       description: Install Accessibility Insights for Web
+     settings:
+        Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\ghbhpcookfemncgoinjblecnilppimih
+        ValueName: update_url
+        ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
