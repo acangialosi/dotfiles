@@ -12,6 +12,8 @@ properties:
      directives:
        description: Install Choco
        allowPrerelease: true
+     settings:
+        InstallDir: 'c:\choco'
    ### Choco Install Git
    ### -------------------------------------
    - resource: cChoco/cChocoPackageInstaller
