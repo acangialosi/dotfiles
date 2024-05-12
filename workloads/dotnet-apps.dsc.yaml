@@ -63,6 +63,15 @@ properties:
        allowPrerelease: true
      settings:
       id: Microsoft.Azd
+    ### Install Docker Desktop
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: docker
+     directives:
+       description: Install Docker Desktop
+       allowPrerelease: true
+     settings:
+      id: Docker.DockerDesktop
    ### Install Visual Sudio
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
