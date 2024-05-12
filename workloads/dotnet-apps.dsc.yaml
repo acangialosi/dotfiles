@@ -64,5 +64,5 @@ properties:
      settings:
        productId: Microsoft.VisualStudio.Product.Enterprise
        channelId: VisualStudio.17.Preview
-       components: Microsoft.VisualStudio.Workload.NetWeb
+       components: Microsoft.VisualStudio.Workload.NetWeb, Microsoft.VisualStudio.Workload.Azure
        includeRecommended: true
