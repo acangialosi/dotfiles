@@ -127,6 +127,9 @@ properties:
      settings:
        SetScript: |
          $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
+         code --install-extension github.copilot
+         code --install-extension github.copilot-chat        
+         code --install-extension GitHub.vscode-github-actions
          code --install-extension ms-python.python
          code --install-extension ms-vscode-remote.remote-wsl
          code --install-extension ms-vscode-remote.remote-containers
@@ -142,7 +145,6 @@ properties:
          code --install-extension ms-kubernetes-tools.aks-devx-tools
          code --install-extension ms-kubernetes-tools.vscode-aks-tools
          code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
-         code --install-extension GitHub.vscode-github-actions
          code --install-extension esbenp.prettier-vscode
          code --install-extension ipedrazas.kubernetes-snippets
          code --install-extension redhat.vscode-yaml
