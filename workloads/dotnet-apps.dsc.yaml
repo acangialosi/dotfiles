@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: 0.2.0
+  ########################################
+  ### RESOURCES: System Configuration
+  ########################################
+  resources:
+   ########################################
+   ### Install CLIs, SDKs & Tools
+   ########################################
+   ### Install Powershell
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: powershell
+     directives:
+       description: Install Powershell
+       allowPrerelease: true
+     settings:
+       id: Microsoft.PowerShell
+   ### Install Azure CLI
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: azurecli
+     directives:
+       description: Install Azure CLI
+       allowPrerelease: true
+     settings:
+      id:  Microsoft.AzureCLI
+   ### Install Bicep CLI
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: bicep
+     directives:
+       description: Install Bicep CLI
+       allowPrerelease: true
+     settings:
+      id: Microsoft.Bicep
+   ### Install Azd
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: Azd
+     directives:
+       description: Install Azd
+       allowPrerelease: true
+     settings:
+      id: Microsoft.Azd
+   ### Install Visual Sudio
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: vsenterprise
+     directives:
+      description: Install Visual Studio 2022 Enterprise
+      allowPrerelease: true
+     settings:
+       id: Microsoft.VisualStudio.2022.Enterprise.Preview
+   ### Install VS Workloads
+   ### -------------------------------------
+   - resource: Microsoft.VisualStudio.DSC/VSComponents
+     directives:
+       description: Install required VS workloads from vsconfig file
+       allowPrerelease: true
+     dependsOn:
+       - mydotifiles
+       - vsenterprise
+     settings:
+       productId: Microsoft.VisualStudio.Product.Enterprise
+       channelId: VisualStudio.17.Preview
+       components: Microsoft.VisualStudio.Workload.aspnetwebtools, Microsoft.VisualStudio.Workload.Azure, Microsoft.VisualStudio.Workload.NetCoreTools
+       includeRecommended: true
