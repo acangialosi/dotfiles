@@ -60,10 +60,9 @@ properties:
        description: Install required VS workloads from vsconfig file
        allowPrerelease: true
      dependsOn:
-       - mydotifiles
        - vsenterprise
      settings:
        productId: Microsoft.VisualStudio.Product.Enterprise
        channelId: VisualStudio.17.Preview
-       components: Microsoft.VisualStudio.Workload.aspnetwebtools, Microsoft.VisualStudio.Workload.Azure, Microsoft.VisualStudio.Workload.NetCoreTools
+       components: Microsoft.VisualStudio.Workload.NetWeb
        includeRecommended: true
