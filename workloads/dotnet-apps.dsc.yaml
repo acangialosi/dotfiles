@@ -83,7 +83,7 @@ properties:
      settings:
        productId: Microsoft.VisualStudio.Product.Enterprise
        channelId: VisualStudio.17.Preview
-       components: Microsoft.VisualStudio.Workload.NetWeb, Microsoft.VisualStudio.Workload.Azure
+       components: [Microsoft.VisualStudio.Workload.NetWeb, Microsoft.VisualStudio.Workload.Azure]
        includeRecommended: true
    ### Install Microsoft Visual Studio Code
    ### -------------------------------------
