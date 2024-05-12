@@ -50,7 +50,7 @@ properties:
    ### Clone dotfiles repository
    ### -------------------------------------
    - resource: GitDsc/GitClone
-     id: mydotifiles
+     id: mydotfiles
      dependsOn:
        - git
        - devdrive
@@ -176,7 +176,7 @@ properties:
        description: Install required VS workloads from vsconfig file
        allowPrerelease: true
      dependsOn:
-       - mydotifiles
+       - mydotfiles
        - vsenterprise
      settings:
        productId: Microsoft.VisualStudio.Product.Enterprise
@@ -215,7 +215,7 @@ properties:
      directives:
       description: Set Visual Studio Unified Settings Profile environment variable
      dependsOn:
-       - mydotifiles
+       - mydotfiles
      settings:
       Name: VS_UNIFIED_SETTINGS_PROFILE
       Value: 'Z:\src\dotfiles\visualstudio\settings\devbox'
