@@ -243,3 +243,31 @@ properties:
          code --install-extension undefined_publisher.devbox
        GetScript: return $false
        TestScript: return $false
+   ### Install Edge
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: edge
+     directives:
+       description: Install Edge
+     settings:
+       id: Microsoft.Edge
+   ### Install 1Password App
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: 1password
+     directives:
+       description: Install 1Password
+     settings:
+       id: AgileBits.1Password
+   ### Install Edge Extension: 1Password
+   ### -------------------------------------
+   - resource: PSDscResources/Registry
+     id: 1password-extension
+     dependsOn:
+       - edge
+     directives:
+       description: Install 1Password
+     settings:
+        Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\dppgmdbiimibapkepcbdbmkaabgiofem
+        ValueName: update_url
+        ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
