@@ -27,15 +27,6 @@ properties:
    ########################################
    ### Install CLIs, SDKs & Tools
    ########################################
-   ### Install Powershell
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: powershell
-     directives:
-       description: Install Powershell
-       allowPrerelease: true
-     settings:
-       id: Microsoft.PowerShell
    ### Install Azure CLI
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -45,15 +36,6 @@ properties:
        allowPrerelease: true
      settings:
       id:  Microsoft.AzureCLI
-   ### Install Bicep CLI
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: bicep
-     directives:
-       description: Install Bicep CLI
-       allowPrerelease: true
-     settings:
-      id: Microsoft.Bicep
    ### Install Azd
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -63,7 +45,7 @@ properties:
        allowPrerelease: true
      settings:
       id: Microsoft.Azd
-    ### Install Docker Desktop
+   ### Install Docker Desktop
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
      id: docker
@@ -110,7 +92,6 @@ properties:
      id: vscodeextensions
      dependsOn:
        - vscode
-       - bicep
        - Azd
        - docker
      directives:
