@@ -8,5 +8,5 @@ tasks:
       directory: c:\workspaces
   - name: winget
     parameters:
-      configurationFile: 'c:\workspaces\dotfiles\ready-for-me.dsc.yaml'
+      configurationFile: 'c:\workspaces\dotfiles\.configurations\ready-for-me.dsc.yaml'
       runAsUser: true
