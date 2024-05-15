@@ -119,5 +119,6 @@ properties:
          code --install-extension ms-azuretools.azure-dev
          code --install-extension ms-azuretools.vscode-docker
          code --install-extension ms-dotnettools.csdevkit
+         code --install-extension ms-dotnettools.dotnet-maui
        GetScript: return $false
        TestScript: return $false
