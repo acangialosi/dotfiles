@@ -61,25 +61,6 @@ properties:
        HttpsUrl: https://github.com/acangialosi/dotfiles
        RootDirectory: z:\src
        Ensure: Present
-   ########################################
-   ### OS Configurations
-   ########################################
-   ### Install Windows VirtualMachinePlatform
-   ### -------------------------------------
-   - resource: PSDscResources/WindowsOptionalFeature
-     directives:
-       description: Install VirtualMachinePlatform
-     settings:
-       name: VirtualMachinePlatform
-       ensure: Present
-   ### Install WSL
-   ### -------------------------------------
-   - resource: PSDscResources/WindowsOptionalFeature
-     directives:
-       description: Install WSL
-     settings:
-       name: Microsoft-Windows-Subsystem-Linux
-       ensure: Present
    ### Enable: Developer Mode
    ### -------------------------------------
    - resource: Microsoft.Windows.Developer/DeveloperMode
