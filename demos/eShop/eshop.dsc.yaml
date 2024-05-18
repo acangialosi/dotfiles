@@ -224,3 +224,44 @@ properties:
        allowPrerelease: true
      settings:
       id: Docker.DockerDesktop
+   ### Clone Contoso-Co Common-Eng-Sys repository
+   ### -------------------------------------
+   - resource: GitDsc/GitClone
+     id: mydotfiles
+     dependsOn:
+       - git
+     directives:
+       description: Clone Contoso-Co Common-Eng-Sys repository
+       allowPrerelease: true
+     settings:
+       HttpsUrl: https://github.com/contoso-co/common-eng-sys
+       RootDirectory: c:\workspaces
+       Ensure: Present
+   ### Clone Contoso-Co eShop repository
+   ### -------------------------------------
+   - resource: GitDsc/GitClone
+     id: mydotfiles
+     dependsOn:
+       - git
+       - devdrive
+     directives:
+       description: Clone Contoso-Co eShop repository
+       allowPrerelease: true
+     settings:
+       HttpsUrl: https://github.com/contoso-co/eShop
+       RootDirectory: z:\workspaces
+       Ensure: Present
+   ### Clone dotfiles repository
+   ### -------------------------------------
+   - resource: GitDsc/GitClone
+     id: mydotfiles
+     dependsOn:
+       - git
+       - devdrive
+     directives:
+       description: Clone WinGet CLI GitHub repository
+       allowPrerelease: true
+     settings:
+       HttpsUrl: https://github.com/acangialosi/dotfiles
+       RootDirectory: z:\workspaces
+       Ensure: Present
