@@ -272,6 +272,6 @@ properties:
      settings:	
        SetScript: |	
          $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")	
-         shutdown /r /f	
+         shutdown /g
        GetScript: return $false	
        TestScript: return $false
