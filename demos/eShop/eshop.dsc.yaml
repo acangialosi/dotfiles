@@ -108,7 +108,7 @@ properties:
    ### Install DevHome (Canary)
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: DevHome
+     id: DevHomeCanary
      directives:
        description: Install DevHome (Canary)
        allowPrerelease: true
@@ -118,7 +118,7 @@ properties:
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
      dependsOn:
-       - DevHome
+       - DevHomeCanary
      directives:
        description: Install DevHome Azure Extension (Canary)
        allowPrerelease: true
@@ -128,7 +128,7 @@ properties:
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
      dependsOn:
-       - DevHome
+       - DevHomeCanary
      directives:
        description: Install DevHome GitHub Extension (Canary)
        allowPrerelease: true
