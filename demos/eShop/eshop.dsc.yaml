@@ -79,11 +79,61 @@ properties:
    ### Install DevHome
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: DevHome
      directives:
        description: Install DevHome
        allowPrerelease: true
      settings:
        id: Microsoft.DevHome
+   ### Install DevHome Azure Extension
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     dependsOn:
+       - DevHome
+     directives:
+       description: Install DevHome Azure Extension
+       allowPrerelease: true
+     settings:
+       id: 9MV8F79FGXTR
+   ### Install DevHome GitHub Extension
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     dependsOn:
+       - DevHome
+     directives:
+       description: Install DevHome GitHub Extension
+       allowPrerelease: true
+     settings:
+       id: 9NZCC27PR6N6
+   ### Install DevHome (Canary)
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     id: DevHome
+     directives:
+       description: Install DevHome (Canary)
+       allowPrerelease: true
+     settings:
+       id: 9MX22N5S7HRD
+   ### Install DevHome Azure Extension (Canary)
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     dependsOn:
+       - DevHome
+     directives:
+       description: Install DevHome Azure Extension (Canary)
+       allowPrerelease: true
+     settings:
+       id: 9NBVFRMSFXHW
+   ### Install DevHome GitHub Extension (Canary)
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     dependsOn:
+       - DevHome
+     directives:
+       description: Install DevHome GitHub Extension (Canary)
+       allowPrerelease: true
+     settings:
+       id: 9N806ZKPW85R
    ### Install Powershell
    ### -------------------------------------
    - resource: Microsoft.WinGet.DSC/WinGetPackage
