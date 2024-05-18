@@ -146,10 +146,10 @@ properties:
    - resource: Microsoft.WinGet.DSC/WinGetPackage
      id: vsenterprise
      directives:
-      description: Install Visual Studio 2022 Enterprise
+      description: Install Visual Studio 2022
       allowPrerelease: true
      settings:
-       id: Microsoft.VisualStudio.2022.Enterprise.Preview
+       id: Microsoft.VisualStudio.2022.Community.Preview
    ### Install VS Workloads
    ### -------------------------------------
    - resource: Microsoft.VisualStudio.DSC/VSComponents
@@ -160,7 +160,7 @@ properties:
        - mydotfiles
        - vsenterprise
      settings:
-       productId: Microsoft.VisualStudio.Product.Enterprise
+       productId: Microsoft.VisualStudio.Product.Community
        channelId: VisualStudio.17.Preview
        VsConfigFile: 'z:\src\dotfiles\visualstudio\extensions\extensions.vsconfig'
        includeRecommended: true
