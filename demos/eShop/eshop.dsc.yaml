@@ -18,248 +18,248 @@ properties:
   ### RESOURCES: System Configuration
   ########################################
   resources:
-   ########################################
-   ### Initialization
-   ########################################
-   ### Format a new Dev Drive
-   ### -------------------------------------
-   - resource: Disk
-     id: devdrive
-     directives:
-       description: 'Format a new Dev Drive volume onto Disk 0'
-       module: StorageDsc
-       allowPrerelease: true
-     settings:
-       DiskId: '0'
-       DiskIdType: 'Number'
-       DriveLetter: 'Z'
-       FSLabel: 'Dev Drive 1'
-       DevDrive: true
-       AllowDestructive: true
-       FSFormat: 'ReFS'
-       Size: '50Gb'
-   ### Install Git
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: git
-     directives:
-       description: Install Git
-       allowPrerelease: true
-     settings:
-       id: Git.Git
-   ### Enable: Developer Mode
-   ### -------------------------------------
-   - resource: Microsoft.Windows.Developer/DeveloperMode
-     directives:
-       description: Enable Developer Mode
-       allowPrerelease: true
-     settings:
-       Ensure: Present
-    ### Show file extensions and hidden files
-    ### -------------------------------------
-   - resource: Microsoft.Windows.Developer/WindowsExplorer
-     directives:
-       description: Show File Extensions and hidden files
-       allowPrerelease: true
-     settings:
-       FileExtensions: Show
-       HiddenFiles: Show
-   ### Set theme to Dark
-   ### -------------------------------------
-   - resource: Microsoft.Windows.Developer/EnableDarkMode
-     directives:
-       description: Set theme to Dark
-       allowPrerelease: true
-     settings:
-       Ensure: Present
-       RestartExplorer: true
-   ########################################
-   ### Install CLIs, SDKs & Tools
-   ########################################
-   ### Install DevHome
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: DevHome
-     directives:
-       description: Install DevHome
-       allowPrerelease: true
-     settings:
-       id: Microsoft.DevHome
-   ### Install DevHome Azure Extension
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     dependsOn:
-       - DevHome
-     directives:
-       description: Install DevHome Azure Extension
-       allowPrerelease: true
-     settings:
-       id: 9MV8F79FGXTR
-   ### Install DevHome GitHub Extension
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     dependsOn:
-       - DevHome
-     directives:
-       description: Install DevHome GitHub Extension
-       allowPrerelease: true
-     settings:
-       id: 9NZCC27PR6N6
-   ### Install DevHome (Canary)
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: DevHomeCanary
-     directives:
-       description: Install DevHome (Canary)
-       allowPrerelease: true
-     settings:
-       id: 9MX22N5S7HRD
-   ### Install DevHome Azure Extension (Canary)
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     dependsOn:
-       - DevHomeCanary
-     directives:
-       description: Install DevHome Azure Extension (Canary)
-       allowPrerelease: true
-     settings:
-       id: 9NBVFRMSFXHW
-   ### Install DevHome GitHub Extension (Canary)
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     dependsOn:
-       - DevHomeCanary
-     directives:
-       description: Install DevHome GitHub Extension (Canary)
-       allowPrerelease: true
-     settings:
-       id: 9N806ZKPW85R
-   ### Install Powershell
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     directives:
-       description: Install Powershell
-       allowPrerelease: true
-     settings:
-       id: Microsoft.PowerShell
-   ### Install Azure CLI
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: azurecli
-     directives:
-       description: Install Azure CLI
-       allowPrerelease: true
-     settings:
-      id:  Microsoft.AzureCLI
-   ### Install Azd
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: Azd
-     directives:
-       description: Install Azd
-       allowPrerelease: true
-     settings:
-      id: Microsoft.Azd
-   ### Install Visual Studio Code
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: vscode
-     directives:
-       description: Install Microsoft Visual Studio Code
-       allowPrerelease: true
-     settings:
-       id: Microsoft.VisualStudioCode
-       ensure: Present
-   ### Install Visual Sudio
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: vside
-     directives:
-      description: Install Visual Studio 2022
+  ########################################
+  ### Initialization
+  ########################################
+  ### Format a new Dev Drive
+  ### -------------------------------------
+  - resource: Disk
+    id: devdrive
+    directives:
+      description: 'Format a new Dev Drive volume onto Disk 0'
+      module: StorageDsc
       allowPrerelease: true
-     settings:
-       id: Microsoft.VisualStudio.2022.Community.Preview
-   ### Install VS Workloads
+    settings:
+      DiskId: '0'
+      DiskIdType: 'Number'
+      DriveLetter: 'Z'
+      FSLabel: 'Dev Drive 1'
+      DevDrive: true
+      AllowDestructive: true
+      FSFormat: 'ReFS'
+      Size: '50Gb'
+  ### Install Git
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: git
+    directives:
+      description: Install Git
+      allowPrerelease: true
+    settings:
+      id: Git.Git
+  ### Enable: Developer Mode
+  ### -------------------------------------
+  - resource: Microsoft.Windows.Developer/DeveloperMode
+    directives:
+      description: Enable Developer Mode
+      allowPrerelease: true
+    settings:
+      Ensure: Present
+   ### Show file extensions and hidden files
    ### -------------------------------------
-   - resource: Microsoft.VisualStudio.DSC/VSComponents
-     directives:
-       description: Install required VS workloads from vsconfig file
-       allowPrerelease: true
-     dependsOn:
-       - vside
-     settings:
-       productId: Microsoft.VisualStudio.Product.Community
-       channelId: VisualStudio.17.Preview
-       components: [Microsoft.VisualStudio.Workload.NetWeb, Microsoft.VisualStudio.Workload.NetCrossPlat, aspire]
-       includeRecommended: true
-   ### Install VS Code Extension
-   ### -------------------------------------
-   - resource: PSDscResources/Script
-     id: vscodeextensions
-     dependsOn:
-       - vscode
-       - docker
-     directives:
-       description: Install Python Extension for VS Code
-     settings:
-       SetScript: |
-         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
-         code --install-extension github.copilot
-         code --install-extension github.copilot-chat
-         code --install-extension GitHub.vscode-github-actions
-         code --install-extension ms-azuretools.azure-dev
-         code --install-extension ms-vscode-remote.remote-wsl
-         code --install-extension ms-vscode-remote.remote-containers
-         code --install-extension ms-azuretools.vscode-docker
-         code --install-extension ms-dotnettools.csdevkit
-         code --install-extension ms-dotnettools.dotnet-maui
-       GetScript: return $false
-       TestScript: return $false
-   ### Install Docker Desktop
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: docker
-     directives:
-       description: Install Docker Desktop
-       allowPrerelease: true
-     settings:
-      id: Docker.DockerDesktop
-   ### Clone Contoso-Co eShop repository
-   ### -------------------------------------
-   - resource: GitDsc/GitClone
-     dependsOn:
-       - git
-       - devdrive
-     directives:
-       description: Clone Contoso-Co eShop repository
-       allowPrerelease: true
-     settings:
-       HttpsUrl: https://github.com/contoso-co/eShop
-       RootDirectory: z:\workspaces
-       Ensure: Present
-   ### Clone dotfiles repository
-   ### -------------------------------------
-   - resource: GitDsc/GitClone
-     id: mydotfiles
-     dependsOn:
-       - git
-       - devdrive
-     directives:
-       description: Clone WinGet CLI GitHub repository
-       allowPrerelease: true
-     settings:
-       HttpsUrl: https://github.com/acangialosi/dotfiles
-       RootDirectory: z:\workspaces
-       Ensure: Present
-   ### Reboot Dev Box	
-   ### -------------------------------------	
-   - resource: PSDscResources/Script	
-     id: reboot	
-     directives:	
-       description: Reboot Dev Box	
-     settings:	
-       SetScript: |	
-         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")	
-         shutdown /g
-       GetScript: return $false	
-       TestScript: return $false
+  - resource: Microsoft.Windows.Developer/WindowsExplorer
+    directives:
+      description: Show File Extensions and hidden files
+      allowPrerelease: true
+    settings:
+      FileExtensions: Show
+      HiddenFiles: Show
+  ### Set theme to Dark
+  ### -------------------------------------
+  - resource: Microsoft.Windows.Developer/EnableDarkMode
+    directives:
+      description: Set theme to Dark
+      allowPrerelease: true
+    settings:
+      Ensure: Present
+      RestartExplorer: true
+  ########################################
+  ### Install CLIs, SDKs & Tools
+  ########################################
+  ### Install DevHome
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: DevHome
+    directives:
+      description: Install DevHome
+      allowPrerelease: true
+    settings:
+      id: Microsoft.DevHome
+  ### Install DevHome Azure Extension
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    dependsOn:
+      - DevHome
+    directives:
+      description: Install DevHome Azure Extension
+      allowPrerelease: true
+    settings:
+      id: 9MV8F79FGXTR
+  ### Install DevHome GitHub Extension
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    dependsOn:
+      - DevHome
+    directives:
+      description: Install DevHome GitHub Extension
+      allowPrerelease: true
+    settings:
+      id: 9NZCC27PR6N6
+  ### Install DevHome (Canary)
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: DevHomeCanary
+    directives:
+      description: Install DevHome (Canary)
+      allowPrerelease: true
+    settings:
+      id: 9MX22N5S7HRD
+  ### Install DevHome Azure Extension (Canary)
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    dependsOn:
+      - DevHomeCanary
+    directives:
+      description: Install DevHome Azure Extension (Canary)
+      allowPrerelease: true
+    settings:
+      id: 9NBVFRMSFXHW
+  ### Install DevHome GitHub Extension (Canary)
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    dependsOn:
+      - DevHomeCanary
+    directives:
+      description: Install DevHome GitHub Extension (Canary)
+      allowPrerelease: true
+    settings:
+      id: 9N806ZKPW85R
+  ### Install Powershell
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    directives:
+      description: Install Powershell
+      allowPrerelease: true
+    settings:
+      id: Microsoft.PowerShell
+  ### Install Azure CLI
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: azurecli
+    directives:
+      description: Install Azure CLI
+      allowPrerelease: true
+    settings:
+     id:  Microsoft.AzureCLI
+  ### Install Azd
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: Azd
+    directives:
+      description: Install Azd
+      allowPrerelease: true
+    settings:
+     id: Microsoft.Azd
+  ### Install Visual Studio Code
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: vscode
+    directives:
+      description: Install Microsoft Visual Studio Code
+      allowPrerelease: true
+    settings:
+      id: Microsoft.VisualStudioCode
+      ensure: Present
+  ### Install Visual Sudio
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: vside
+    directives:
+     description: Install Visual Studio 2022
+     allowPrerelease: true
+    settings:
+      id: Microsoft.VisualStudio.2022.Community.Preview
+  ### Install VS Workloads
+  ### -------------------------------------
+  - resource: Microsoft.VisualStudio.DSC/VSComponents
+    directives:
+      description: Install required VS workloads from vsconfig file
+      allowPrerelease: true
+    dependsOn:
+      - vside
+    settings:
+      productId: Microsoft.VisualStudio.Product.Community
+      channelId: VisualStudio.17.Preview
+      components: [Microsoft.VisualStudio.Workload.NetWeb, Microsoft.VisualStudio.Workload.NetCrossPlat, aspire]
+      includeRecommended: true
+  ### Install VS Code Extension
+  ### -------------------------------------
+  - resource: PSDscResources/Script
+    id: vscodeextensions
+    dependsOn:
+      - vscode
+      - docker
+    directives:
+      description: Install Python Extension for VS Code
+    settings:
+      SetScript: |
+        $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
+        code --install-extension github.copilot
+        code --install-extension github.copilot-chat
+        code --install-extension GitHub.vscode-github-actions
+        code --install-extension ms-azuretools.azure-dev
+        code --install-extension ms-vscode-remote.remote-wsl
+        code --install-extension ms-vscode-remote.remote-containers
+        code --install-extension ms-azuretools.vscode-docker
+        code --install-extension ms-dotnettools.csdevkit
+        code --install-extension ms-dotnettools.dotnet-maui
+      GetScript: return $false
+      TestScript: return $false
+  ### Install Docker Desktop
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: docker
+    directives:
+      description: Install Docker Desktop
+      allowPrerelease: true
+    settings:
+     id: Docker.DockerDesktop
+  ### Clone Contoso-Co eShop repository
+  ### -------------------------------------
+  - resource: GitDsc/GitClone
+    dependsOn:
+      - git
+      - devdrive
+    directives:
+      description: Clone Contoso-Co eShop repository
+      allowPrerelease: true
+    settings:
+      HttpsUrl: https://github.com/contoso-co/eShop
+      RootDirectory: z:\workspaces
+      Ensure: Present
+  ### Clone dotfiles repository
+  ### -------------------------------------
+  - resource: GitDsc/GitClone
+    id: mydotfiles
+    dependsOn:
+      - git
+      - devdrive
+    directives:
+      description: Clone WinGet CLI GitHub repository
+      allowPrerelease: true
+    settings:
+      HttpsUrl: https://github.com/acangialosi/dotfiles
+      RootDirectory: z:\workspaces
+      Ensure: Present
+  ### Reboot Dev Box	
+  ### -------------------------------------	
+  - resource: PSDscResources/Script	
+    id: reboot	
+    directives:	
+      description: Reboot Dev Box	
+    settings:	
+      SetScript: |	
+        $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")	
+        shutdown /g
+      GetScript: return $false	
+      TestScript: return $false

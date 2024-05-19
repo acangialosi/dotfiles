@@ -13,21 +13,21 @@
 # See https://github.com/dsccommunity/StorageDsc/wiki/Disk for details about the parameters for the Disk resource.
 #
 properties:
-    configurationVersion: '0.2.0'
-    resources:
-        # Creates a new Dev Drive volume with Drive letter 'Z' and label 'Dev Drive 1' onto disk 0
-        - resource: Disk
-          id: DevDrive1
-          directives:
-            description: 'Format a new Dev Drive volume onto Disk 0'
-            module: StorageDsc
-            allowPrerelease: true
-          settings:
-            DiskId: '0'
-            DiskIdType: 'Number'
-            DriveLetter: 'Z'
-            FSLabel: 'Dev Drive 1'
-            DevDrive: true
-            AllowDestructive: true
-            FSFormat: 'ReFS'
-            Size: '50Gb'
+  configurationVersion: '0.2.0'
+  resources:
+  # Creates a new Dev Drive volume with Drive letter 'Z' and label 'Dev Drive 1' onto disk 0
+  - resource: Disk
+    id: DevDrive1
+    directives:
+      description: 'Format a new Dev Drive volume onto Disk 0'
+      module: StorageDsc
+      allowPrerelease: true
+    settings:
+      DiskId: '0'
+      DiskIdType: 'Number'
+      DriveLetter: 'Z'
+      FSLabel: 'Dev Drive 1'
+      DevDrive: true
+      AllowDestructive: true
+      FSFormat: 'ReFS'
+      Size: '50Gb'

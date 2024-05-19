@@ -5,11 +5,11 @@ properties:
   ### RESOURCES: System Configuration
   ########################################
   resources:
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: OMP
-     directives:
-       description: Install Oh My Posh
-       allowPrerelease: true
-     settings:
-       id: JanDeDobbeleer.OhMyPosh
-       source: winget
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: OMP
+    directives:
+      description: Install Oh My Posh
+      allowPrerelease: true
+    settings:
+      id: JanDeDobbeleer.OhMyPosh
+      source: winget

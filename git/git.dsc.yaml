@@ -5,47 +5,47 @@ properties:
   ### RESOURCES: System Configuration
   ########################################
   resources:
-   ### Install Git
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: git
-     directives:
-       description: Install Git
-       allowPrerelease: true
-     settings:
-       id: Git.Git
-   ### Git Configure Name
-   ### -------------------------------------
-   - resource: GitDsc/GitConfigUserName
-     directives:
-       description: Configure Git
-       allowPrerelease: true
-     dependsOn:
-       - git
-     settings:
-        UserName: "Anthony Cangialosi [MS]"
-        ConfigLocation: "Global"
-   ### Git Configure Email
-   ### -------------------------------------
-   - resource: GitDsc/GitConfigUserEmail
-     directives:
-       description: Configure Git
-       allowPrerelease: true
-     dependsOn:
-       - git
-     settings:
-        UserEmail: "5457010+acangialosi@users.noreply.github.com"
-        ConfigLocation: "Global"
-   ### Clone dotfiles repository
-   ### -------------------------------------
-   - resource: GitDsc/GitClone
-     id: mydotifiles
-     dependsOn:
-       - git
-     directives:
-       description: Clone WinGet CLI GitHub repository
-       allowPrerelease: true
-     settings:
-       HttpsUrl: https://github.com/acangialosi/dotfiles
-       RootDirectory: c:\src
-       Ensure: Present
+  ### Install Git
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: git
+    directives:
+      description: Install Git
+      allowPrerelease: true
+    settings:
+      id: Git.Git
+  ### Git Configure Name
+  ### -------------------------------------
+  - resource: GitDsc/GitConfigUserName
+    directives:
+      description: Configure Git
+      allowPrerelease: true
+    dependsOn:
+      - git
+    settings:
+       UserName: "Anthony Cangialosi [MS]"
+       ConfigLocation: "Global"
+  ### Git Configure Email
+  ### -------------------------------------
+  - resource: GitDsc/GitConfigUserEmail
+    directives:
+      description: Configure Git
+      allowPrerelease: true
+    dependsOn:
+      - git
+    settings:
+       UserEmail: "5457010+acangialosi@users.noreply.github.com"
+       ConfigLocation: "Global"
+  ### Clone dotfiles repository
+  ### -------------------------------------
+  - resource: GitDsc/GitClone
+    id: mydotifiles
+    dependsOn:
+      - git
+    directives:
+      description: Clone WinGet CLI GitHub repository
+      allowPrerelease: true
+    settings:
+      HttpsUrl: https://github.com/acangialosi/dotfiles
+      RootDirectory: c:\src
+      Ensure: Present

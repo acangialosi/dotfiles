@@ -5,25 +5,25 @@ properties:
   ### RESOURCES: System Configuration
   ########################################
   resources:
-   ### Clone dotfiles repository
-   ### -------------------------------------
-   - resource: GitDsc/GitClone
-     id: mydotifiles
-     dependsOn:
-       - git
-     directives:
-       description: Clone WinGet CLI GitHub repository
-       allowPrerelease: true
-     settings:
-       HttpsUrl: https://github.com/acangialosi/dotfiles
-       RootDirectory: c:\src
-       Ensure: Present
-   ### Configure Visual Studio settings
-   ### -------------------------------------
-   - resource: Environment
-     directives:
-      description: Set Visual Studio Unified Settings Profile environment variable
-     settings:
-      Name: VS_UNIFIED_SETTINGS_PROFILE
-      Value: 'c:\src\dotfiles\visualstudio\settings\devbox'
+  ### Clone dotfiles repository
+  ### -------------------------------------
+  - resource: GitDsc/GitClone
+    id: mydotifiles
+    dependsOn:
+      - git
+    directives:
+      description: Clone WinGet CLI GitHub repository
+      allowPrerelease: true
+    settings:
+      HttpsUrl: https://github.com/acangialosi/dotfiles
+      RootDirectory: c:\src
       Ensure: Present
+  ### Configure Visual Studio settings
+  ### -------------------------------------
+  - resource: Environment
+    directives:
+     description: Set Visual Studio Unified Settings Profile environment variable
+    settings:
+     Name: VS_UNIFIED_SETTINGS_PROFILE
+     Value: 'c:\src\dotfiles\visualstudio\settings\devbox'
+     Ensure: Present

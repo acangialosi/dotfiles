@@ -5,22 +5,22 @@ properties:
   ### RESOURCES: System Configuration
   ########################################
   resources:
-   ### Install Chocolatey
-   ### -------------------------------------
-   - resource: cChoco/cChocoInstaller
-     id: choco
-     directives:
-       description: Install Choco
-       allowPrerelease: true
-     settings:
-        InstallDir: 'c:\choco'
-   ### Choco Install Git
-   ### -------------------------------------
-   - resource: cChoco/cChocoPackageInstaller
-     directives:
-       description: Choco install git
-       allowPrerelease: true
-     dependsOn:
-       - choco
-     settings:
-        Name: git
+  ### Install Chocolatey
+  ### -------------------------------------
+  - resource: cChoco/cChocoInstaller
+    id: choco
+    directives:
+      description: Install Choco
+      allowPrerelease: true
+    settings:
+       InstallDir: 'c:\choco'
+  ### Choco Install Git
+  ### -------------------------------------
+  - resource: cChoco/cChocoPackageInstaller
+    directives:
+      description: Choco install git
+      allowPrerelease: true
+    dependsOn:
+      - choco
+    settings:
+       Name: git

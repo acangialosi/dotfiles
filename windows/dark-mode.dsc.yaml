@@ -5,11 +5,11 @@ properties:
   ### RESOURCES: System Configuration
   ########################################
   resources:
-   - resource: Microsoft.Windows.Developer/EnableDarkMode
-     id: DarkMode
-     directives:
-       description: Enable Dark Mode
-       allowPrerelease: true
-     settings:
-       Ensure: Present
-       RestartExplorer: true
+  - resource: Microsoft.Windows.Developer/EnableDarkMode
+    id: DarkMode
+    directives:
+      description: Enable Dark Mode
+      allowPrerelease: true
+    settings:
+      Ensure: Present
+      RestartExplorer: true

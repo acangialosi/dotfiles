@@ -1,15 +1,15 @@
 properties:
-    configurationVersion: '0.2.0'
+  configurationVersion: '0.2.0'
   ########################################
   ### RESOURCES: System Configuration
   ########################################
-    resources:
-    ### Show file extensions and hidden files
-    ### -------------------------------------
-    - resource: Microsoft.Windows.Developer/WindowsExplorer
-      directives:
-        description: Show File Extensions
-        allowPrerelease: true
-      settings:
-        FileExtensions: Show  # Hide
-        HiddenFiles: Show # Hide
+  resources:
+  ### Show file extensions and hidden files
+  ### -------------------------------------
+  - resource: Microsoft.Windows.Developer/WindowsExplorer
+    directives:
+      description: Show File Extensions
+      allowPrerelease: true
+    settings:
+      FileExtensions: Show  # Hide
+      HiddenFiles: Show # Hide

@@ -5,13 +5,13 @@ properties:
   ### RESOURCES: System Configuration
   ########################################
   resources:
-   - resource: Microsoft.VisualStudio.DSC/VSComponents
-     directives:
-       description: Install required VS workloads from vsconfig file
-       allowPrerelease: true
-     settings:
-       productId: Microsoft.VisualStudio.Product.Enterprise
-       channelId: VisualStudio.17.Preview
-       VsConfigFile: 'z:\src\dotfiles\visualstudio\extensions\extensions.vsconfig'
-       includeRecommended: true
-       allowUnsignedExtensions: true
+  - resource: Microsoft.VisualStudio.DSC/VSComponents
+    directives:
+      description: Install required VS workloads from vsconfig file
+      allowPrerelease: true
+    settings:
+      productId: Microsoft.VisualStudio.Product.Enterprise
+      channelId: VisualStudio.17.Preview
+      VsConfigFile: 'z:\src\dotfiles\visualstudio\extensions\extensions.vsconfig'
+      includeRecommended: true
+      allowUnsignedExtensions: true

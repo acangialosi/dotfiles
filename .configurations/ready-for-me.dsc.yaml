@@ -18,262 +18,254 @@ properties:
   ### RESOURCES: System Configuration
   ########################################
   resources:
-   ########################################
-   ### Initialization
-   ########################################
-   ### Format a new Dev Drive
-   ### -------------------------------------
-   - resource: Disk
-     id: devdrive
-     directives:
-       description: 'Format a new Dev Drive volume onto Disk 0'
-       module: StorageDsc
-       allowPrerelease: true
-     settings:
-       DiskId: '0'
-       DiskIdType: 'Number'
-       DriveLetter: 'Z'
-       FSLabel: 'Dev Drive 1'
-       DevDrive: true
-       AllowDestructive: true
-       FSFormat: 'ReFS'
-       Size: '50Gb'
-   ### Install Git
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: git
-     directives:
-       description: Install Git
-       allowPrerelease: true
-     settings:
-       id: Git.Git
-   ### Clone dotfiles repository
-   ### -------------------------------------
-   - resource: GitDsc/GitClone
-     id: mydotfiles
-     dependsOn:
-       - git
-       - devdrive
-     directives:
-       description: Clone WinGet CLI GitHub repository
-       allowPrerelease: true
-     settings:
-       HttpsUrl: https://github.com/acangialosi/dotfiles
-       RootDirectory: z:\workspaces
-       Ensure: Present
-   ### Enable: Developer Mode
-   ### -------------------------------------
-   - resource: Microsoft.Windows.Developer/DeveloperMode
-     directives:
-       description: Enable Developer Mode
-       allowPrerelease: true
-     settings:
-       Ensure: Present
-    ### Show file extensions and hidden files
-    ### -------------------------------------
-   - resource: Microsoft.Windows.Developer/WindowsExplorer
-     directives:
-       description: Show File Extensions and hidden files
-       allowPrerelease: true
-     settings:
-       FileExtensions: Show
-       HiddenFiles: Show
-   ### Set theme to Dark
-   ### -------------------------------------
-   - resource: Microsoft.Windows.Developer/EnableDarkMode
-     directives:
-       description: Set theme to Dark
-       allowPrerelease: true
-     settings:
-       Ensure: Present
-       RestartExplorer: true
-   ########################################
-   ### Install CLIs, SDKs & Tools
-   ########################################
-   ### Install DevHome
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: DevHome
-     directives:
-       description: Install DevHome
-       allowPrerelease: true
-     settings:
-       id: Microsoft.DevHome
-   ### Install DevHome Azure Extension
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     dependsOn:
-       - DevHome
-     directives:
-       description: Install DevHome Azure Extension
-       allowPrerelease: true
-     settings:
-       id: 9MV8F79FGXTR
-   ### Install DevHome GitHub Extension
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     dependsOn:
-       - DevHome
-     directives:
-       description: Install DevHome GitHub Extension
-       allowPrerelease: true
-     settings:
-       id: 9NZCC27PR6N6
-   ### Install Powershell
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     directives:
-       description: Install Powershell
-       allowPrerelease: true
-     settings:
-       id: Microsoft.PowerShell
-   ### Install OMP
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: OMP
-     directives:
-       description: Install Oh My Posh
-       allowPrerelease: true
-     settings:
-       id: JanDeDobbeleer.OhMyPosh
-   ### Install Azure CLI
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: azurecli
-     directives:
-       description: Install Azure CLI
-       allowPrerelease: true
-     settings:
-      id:  Microsoft.AzureCLI
-   ### Install Azd
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     directives:
-       description: Install Azd
-       allowPrerelease: true
-     settings:
-       id: Microsoft.Azd
-   ### Install GitKraken
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     directives:
-       description: Install GitKraken
-       allowPrerelease: true
-     settings:
-       id: Axosoft.GitKraken
-   ### Install Visual Studio Code
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: vscode
-     directives:
-       description: Install Microsoft Visual Studio Code
-       allowPrerelease: true
-     settings:
-       id: Microsoft.VisualStudioCode
-       ensure: Present
-   ### Install Visual Sudio
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: vside
-     directives:
-      description: Install Visual Studio 2022
+  ########################################
+  ### Initialization
+  ########################################
+  ### Format a new Dev Drive
+  ### -------------------------------------
+  - resource: Disk
+    id: devdrive
+    directives:
+      description: 'Format a new Dev Drive volume onto Disk 0'
+      module: StorageDsc
       allowPrerelease: true
-     settings:
-       id: Microsoft.VisualStudio.2022.Community.Preview
-   ### Install VS Workloads
-   ### -------------------------------------
-   - resource: Microsoft.VisualStudio.DSC/VSComponents
-     directives:
-       description: Install required VS workloads from vsconfig file
-       allowPrerelease: true
-     dependsOn:
-       - mydotfiles
-       - vside
-     settings:
-       productId: Microsoft.VisualStudio.Product.Community
-       channelId: VisualStudio.17.Preview
-       VsConfigFile: 'z:\workspaces\dotfiles\visualstudio\extensions\extensions.vsconfig'
-       includeRecommended: true
-       allowUnsignedExtensions: true
-   ########################################
-   ### Configure settings
-   ########################################
-   ### Git Configure Name
-   ### -------------------------------------
-   - resource: GitDsc/GitConfigUserName
-     directives:
-       description: Configure Git
-       allowPrerelease: true
-     dependsOn:
-       - git
-     settings:
-        UserName: "Anthony Cangialosi [MS]"
-        ConfigLocation: "Global"
-   ### Git Configure Email
-   ### -------------------------------------
-   - resource: GitDsc/GitConfigUserEmail
-     directives:
-       description: Configure Git
-       allowPrerelease: true
-     dependsOn:
-       - git
-     settings:
-        UserEmail: "5457010+acangialosi@users.noreply.github.com"
-        ConfigLocation: "Global"
-   ### Configure Visual Studio settings
-   ### -------------------------------------
-   - resource: Environment
-     directives:
-      description: Set Visual Studio Unified Settings Profile environment variable
-     dependsOn:
-       - mydotfiles
-     settings:
-      Name: VS_UNIFIED_SETTINGS_PROFILE
-      Value: 'Z:\workspaces\dotfiles\visualstudio\settings\devbox'
+    settings:
+      DiskId: '0'
+      DiskIdType: 'Number'
+      DriveLetter: 'Z'
+      FSLabel: 'Dev Drive 1'
+      DevDrive: true
+      AllowDestructive: true
+      FSFormat: 'ReFS'
+      Size: '50Gb'
+  ### Install Git
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: git
+    directives:
+      description: Install Git
+      allowPrerelease: true
+    settings:
+      id: Git.Git
+  ### Clone dotfiles repository
+  ### -------------------------------------
+  - resource: GitDsc/GitClone
+    id: mydotfiles
+    dependsOn:
+      - git
+      - devdrive
+    directives:
+      description: Clone WinGet CLI GitHub repository
+      allowPrerelease: true
+    settings:
+      HttpsUrl: https://github.com/acangialosi/dotfiles
+      RootDirectory: z:\workspaces
       Ensure: Present
-   ### Install VS Code Extensions
+  ### Enable: Developer Mode
+  ### -------------------------------------
+  - resource: Microsoft.Windows.Developer/DeveloperMode
+    directives:
+      description: Enable Developer Mode
+      allowPrerelease: true
+    settings:
+      Ensure: Present
+   ### Show file extensions and hidden files
    ### -------------------------------------
-   - resource: PSDscResources/Script
-     id: vscodeextensions
-     dependsOn:
-       - vscode
-     directives:
-       description: Install Python Extension for VS Code
-     settings:
-       SetScript: |
-         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
-         code --install-extension github.copilot
-         code --install-extension devcenter.ms-devbox
-         code --install-extension ms-vscode.powershell
-         code --install-extension ms-dotnettools.csdevkit
-         code --install-extension ms-azuretools.azure-dev
-       GetScript: return $false
-       TestScript: return $false
-   ### Install Edge
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: edge
-     directives:
-       description: Install Edge
-     settings:
-       id: Microsoft.Edge
-   ### Install 1Password App
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: 1password
-     directives:
-       description: Install 1Password
-     settings:
-       id: AgileBits.1Password
-   ### Install Edge Extension: 1Password
-   ### -------------------------------------
-   - resource: PSDscResources/Registry
-     id: 1password-extension
-     dependsOn:
-       - edge
-     directives:
-       description: Install 1Password
-     settings:
-        Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\dppgmdbiimibapkepcbdbmkaabgiofem
-        ValueName: update_url
-        ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
+  - resource: Microsoft.Windows.Developer/WindowsExplorer
+    directives:
+      description: Show File Extensions and hidden files
+      allowPrerelease: true
+    settings:
+      FileExtensions: Show
+      HiddenFiles: Show
+  ### Set theme to Dark
+  ### -------------------------------------
+  - resource: Microsoft.Windows.Developer/EnableDarkMode
+    directives:
+      description: Set theme to Dark
+      allowPrerelease: true
+    settings:
+      Ensure: Present
+      RestartExplorer: true
+  ########################################
+  ### Install CLIs, SDKs & Tools
+  ########################################
+  ### Install DevHome
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: DevHome
+    directives:
+      description: Install DevHome
+      allowPrerelease: true
+    settings:
+      id: Microsoft.DevHome
+  ### Install DevHome Azure Extension
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    dependsOn:
+      - DevHome
+    directives:
+      description: Install DevHome Azure Extension
+      allowPrerelease: true
+    settings:
+      id: 9MV8F79FGXTR
+  ### Install DevHome GitHub Extension
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    dependsOn:
+      - DevHome
+    directives:
+      description: Install DevHome GitHub Extension
+      allowPrerelease: true
+    settings:
+      id: 9NZCC27PR6N6
+  ### Install Powershell
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    directives:
+      description: Install Powershell
+      allowPrerelease: true
+    settings:
+      id: Microsoft.PowerShell
+  ### Install OMP
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: OMP
+    directives:
+      description: Install Oh My Posh
+      allowPrerelease: true
+    settings:
+      id: JanDeDobbeleer.OhMyPosh
+  ### Install Azure CLI
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: azurecli
+    directives:
+      description: Install Azure CLI
+      allowPrerelease: true
+    settings:
+     id:  Microsoft.AzureCLI
+  ### Install Azd
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    directives:
+      description: Install Azd
+      allowPrerelease: true
+    settings:
+      id: Microsoft.Azd
+  ### Install Visual Studio Code
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: vscode
+    directives:
+      description: Install Microsoft Visual Studio Code
+      allowPrerelease: true
+    settings:
+      id: Microsoft.VisualStudioCode
+      ensure: Present
+  ### Install Visual Sudio
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: vside
+    directives:
+     description: Install Visual Studio 2022
+     allowPrerelease: true
+    settings:
+      id: Microsoft.VisualStudio.2022.Community.Preview
+  ### Install VS Workloads
+  ### -------------------------------------
+  - resource: Microsoft.VisualStudio.DSC/VSComponents
+    directives:
+      description: Install required VS workloads from vsconfig file
+      allowPrerelease: true
+    dependsOn:
+      - mydotfiles
+      - vside
+    settings:
+      productId: Microsoft.VisualStudio.Product.Community
+      channelId: VisualStudio.17.Preview
+      VsConfigFile: 'z:\workspaces\dotfiles\visualstudio\extensions\extensions.vsconfig'
+      includeRecommended: true
+      allowUnsignedExtensions: true
+  ########################################
+  ### Configure settings
+  ########################################
+  ### Git Configure Name
+  ### -------------------------------------
+  - resource: GitDsc/GitConfigUserName
+    directives:
+      description: Configure Git
+      allowPrerelease: true
+    dependsOn:
+      - git
+    settings:
+       UserName: "Anthony Cangialosi [MS]"
+       ConfigLocation: "Global"
+  ### Git Configure Email
+  ### -------------------------------------
+  - resource: GitDsc/GitConfigUserEmail
+    directives:
+      description: Configure Git
+      allowPrerelease: true
+    dependsOn:
+      - git
+    settings:
+       UserEmail: "5457010+acangialosi@users.noreply.github.com"
+       ConfigLocation: "Global"
+  ### Configure Visual Studio settings
+  ### -------------------------------------
+  - resource: Environment
+    directives:
+     description: Set Visual Studio Unified Settings Profile environment variable
+    dependsOn:
+      - mydotfiles
+    settings:
+     Name: VS_UNIFIED_SETTINGS_PROFILE
+     Value: 'Z:\workspaces\dotfiles\visualstudio\settings\devbox'
+     Ensure: Present
+  ### Install VS Code Extensions
+  ### -------------------------------------
+  - resource: PSDscResources/Script
+    id: vscodeextensions
+    dependsOn:
+      - vscode
+    directives:
+      description: Install Python Extension for VS Code
+    settings:
+      SetScript: |
+        $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
+        code --install-extension github.copilot
+        code --install-extension devcenter.ms-devbox
+        code --install-extension ms-vscode.powershell
+        code --install-extension ms-dotnettools.csdevkit
+        code --install-extension ms-azuretools.azure-dev
+      GetScript: return $false
+      TestScript: return $false
+  ### Install Edge
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: edge
+    directives:
+      description: Install Edge
+    settings:
+      id: Microsoft.Edge
+  ### Install 1Password App
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: 1password
+    directives:
+      description: Install 1Password
+    settings:
+      id: AgileBits.1Password
+  ### Install Edge Extension: 1Password
+  ### -------------------------------------
+  - resource: PSDscResources/Registry
+    id: 1password-extension
+    dependsOn:
+      - edge
+    directives:
+      description: Install 1Password
+    settings:
+       Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\dppgmdbiimibapkepcbdbmkaabgiofem
+       ValueName: update_url
+       ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx

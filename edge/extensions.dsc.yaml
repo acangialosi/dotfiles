@@ -5,47 +5,47 @@ properties:
   ### RESOURCES: System Configuration
   ########################################
   resources:
-   ### Install Edge
-   ### -------------------------------------
-   - resource: Microsoft.WinGet.DSC/WinGetPackage
-     id: edge
-     directives:
-       description: Install Edge
-     settings:
-       id: Microsoft.Edge
-   ### Install Edge Extension: Accessibility Insights
-   ### -------------------------------------
-   - resource: PSDscResources/Registry
-     id: accessibility-insights
-     dependsOn:
-       - edge
-     directives:
-       description: Install Accessibility Insights for Web
-     settings:
-        Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\ghbhpcookfemncgoinjblecnilppimih
-        ValueName: update_url
-        ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
-   ### Install Edge Extension: Microsoft Editor
-   ### -------------------------------------
-   - resource: PSDscResources/Registry
-     id: accessibility-insights
-     dependsOn:
-       - edge
-     directives:
-       description: Install Microsoft Editor
-     settings:
-        Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\hokifickgkhplphjiodbggjmoafhignh
-        ValueName: update_url
-        ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
-   ### Install Edge Extension: Adobe Acrobat
-   ### -------------------------------------
-   - resource: PSDscResources/Registry
-     id: accessibility-insights
-     dependsOn:
-       - edge
-     directives:
-       description: Install Microsoft Editor
-     settings:
-        Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\elhekieabhbkpmcefcoobjddigjcaadp
-        ValueName: update_url
-        ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
+  ### Install Edge
+  ### -------------------------------------
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: edge
+    directives:
+      description: Install Edge
+    settings:
+      id: Microsoft.Edge
+  ### Install Edge Extension: Accessibility Insights
+  ### -------------------------------------
+  - resource: PSDscResources/Registry
+    id: accessibility-insights
+    dependsOn:
+      - edge
+    directives:
+      description: Install Accessibility Insights for Web
+    settings:
+       Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\ghbhpcookfemncgoinjblecnilppimih
+       ValueName: update_url
+       ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
+  ### Install Edge Extension: Microsoft Editor
+  ### -------------------------------------
+  - resource: PSDscResources/Registry
+    id: accessibility-insights
+    dependsOn:
+      - edge
+    directives:
+      description: Install Microsoft Editor
+    settings:
+       Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\hokifickgkhplphjiodbggjmoafhignh
+       ValueName: update_url
+       ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
+  ### Install Edge Extension: Adobe Acrobat
+  ### -------------------------------------
+  - resource: PSDscResources/Registry
+    id: accessibility-insights
+    dependsOn:
+      - edge
+    directives:
+      description: Install Microsoft Editor
+    settings:
+       Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\elhekieabhbkpmcefcoobjddigjcaadp
+       ValueName: update_url
+       ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
