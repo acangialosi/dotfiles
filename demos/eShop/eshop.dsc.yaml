@@ -64,16 +64,7 @@ properties:
       settings:
         FileExtensions: Show
         HiddenFiles: Show
-    ### Set theme to Dark
-    ### -------------------------------------
-    - resource: Microsoft.Windows.Developer/EnableDarkMode
-      directives:
-        description: Set theme to Dark
-        allowPrerelease: true
-      settings:
-        Ensure: Present
-        RestartExplorer: true
-    ########################################
+      ########################################
     ### Install CLIs, SDKs & Tools
     ########################################
     ### Install DevHome
