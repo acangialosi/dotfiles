@@ -55,16 +55,7 @@ properties:
         allowPrerelease: true
       settings:
         Ensure: Present
-     ### Show file extensions and hidden files
-     ### -------------------------------------
-    - resource: Microsoft.Windows.Developer/WindowsExplorer
-      directives:
-        description: Show File Extensions and hidden files
-        allowPrerelease: true
-      settings:
-        FileExtensions: Show
-        HiddenFiles: Show
-      ########################################
+    ########################################
     ### Install CLIs, SDKs & Tools
     ########################################
     ### Install DevHome
@@ -235,20 +226,6 @@ properties:
         allowPrerelease: true
       settings:
         HttpsUrl: https://github.com/contoso-co/eShop
-        RootDirectory: z:\workspaces
-        Ensure: Present
-    ### Clone dotfiles repository
-    ### -------------------------------------
-    - resource: GitDsc/GitClone
-      id: mydotfiles
-      dependsOn:
-        - git
-        - devdrive
-      directives:
-        description: Clone WinGet CLI GitHub repository
-        allowPrerelease: true
-      settings:
-        HttpsUrl: https://github.com/acangialosi/dotfiles
         RootDirectory: z:\workspaces
         Ensure: Present
     ### Reboot Dev Box	
