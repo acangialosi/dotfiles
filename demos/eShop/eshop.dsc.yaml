@@ -160,6 +160,15 @@ properties:
         allowPrerelease: true
       settings:
        id: Microsoft.Azd
+    ### Install DotNet SDK Preview
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: DotNetSDK
+      directives:
+        description: Install DotNet SDK Preview
+        allowPrerelease: true
+      settings:
+       id: Microsoft.DotNet.Runtime.Preview
     ### Install Visual Studio Code
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
