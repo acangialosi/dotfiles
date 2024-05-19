@@ -224,18 +224,6 @@ properties:
        allowPrerelease: true
      settings:
       id: Docker.DockerDesktop
-   ### Clone Contoso-Co Common-Eng-Sys repository
-   ### -------------------------------------
-   - resource: GitDsc/GitClone
-     dependsOn:
-       - git
-     directives:
-       description: Clone Contoso-Co Common-Eng-Sys repository
-       allowPrerelease: true
-     settings:
-       HttpsUrl: https://github.com/contoso-co/common-eng-sys
-       RootDirectory: c:\workspaces
-       Ensure: Present
    ### Clone Contoso-Co eShop repository
    ### -------------------------------------
    - resource: GitDsc/GitClone
