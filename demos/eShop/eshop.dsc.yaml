@@ -168,7 +168,7 @@ properties:
         description: Install DotNet SDK Preview
         allowPrerelease: true
       settings:
-       id: Microsoft.DotNet.Runtime.Preview
+       id: Microsoft.DotNet.SDK.Preview
     ### Install Visual Studio Code
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
