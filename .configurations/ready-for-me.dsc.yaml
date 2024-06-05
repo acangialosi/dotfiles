@@ -212,6 +212,19 @@ properties:
       settings:
          UserEmail: "5457010+acangialosi@users.noreply.github.com"
          ConfigLocation: "Global"
+    ### Configure Git to use Default WAM account
+    ### -------------------------------------
+    - resource: PSDscResources/Script
+      dependsOn:
+        - git
+      directives:
+        description: Configure Git to use Default WAM account
+      settings:
+        SetScript: |
+          git config --global credential.msauthUseDefaultAccount true
+        GetScript: return $false
+        TestScript: return $false
+
     ### Configure Visual Studio settings
     ### -------------------------------------
     - resource: Environment
