@@ -224,7 +224,6 @@ properties:
           git config --global credential.msauthUseDefaultAccount true
         GetScript: return $false
         TestScript: return $false
-
     ### Configure Visual Studio settings
     ### -------------------------------------
     - resource: Environment
