@@ -201,6 +201,19 @@ properties:
       settings:
          UserName: "Anthony Cangialosi [MS]"
          ConfigLocation: "Global"
+    ### WORKAROUND: GitDsc/GitConfigUserName not working right now.
+    ### Git Configure Name
+    ### -------------------------------------
+    - resource: PSDscResources/Script
+      dependsOn:
+        - git
+      directives:
+        description: Configure Git to use Default WAM account
+      settings:
+        SetScript: |
+          git config --global user.name "Anthony Cangialosi [MS]"
+        GetScript: return $false
+        TestScript: return $false
     ### Git Configure Email
     ### -------------------------------------
     - resource: GitDsc/GitConfigUserEmail
