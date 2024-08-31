@@ -12,6 +12,6 @@ properties:
     settings:
       productId: Microsoft.VisualStudio.Product.Enterprise
       channelId: VisualStudio.17.Preview
-      VsConfigFile: 'z:\src\dotfiles\visualstudio\extensions\extensions.vsconfig'
+      VsConfigFile: 'z:\workspaces\dotfiles\visualstudio\extensions\extensions.vsconfig'
       includeRecommended: true
       allowUnsignedExtensions: true
