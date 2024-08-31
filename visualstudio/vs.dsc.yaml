@@ -18,7 +18,6 @@ properties:
         description: Install required VS workloads from vsconfig file
         allowPrerelease: true
       dependsOn:
-        - mydotfiles
         - vside
       settings:
         productId: Microsoft.VisualStudio.Product.Community
