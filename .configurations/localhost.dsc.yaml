@@ -1,0 +1,78 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    ########################################
+    ### Initialization
+    ########################################
+    ### Set theme to Dark
+    ### -------------------------------------
+    - resource: Microsoft.Windows.Developer/EnableDarkMode
+      directives:
+        description: Set theme to Dark
+        allowPrerelease: true
+      settings:
+        Ensure: Present
+        RestartExplorer: true
+    ########################################
+    ### Install CLIs, SDKs & Tools
+    ########################################
+    ### Install DevHome
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: DevHome
+      directives:
+        description: Install DevHome
+        allowPrerelease: true
+      settings:
+        id: Microsoft.DevHome
+    ### Install DevHome Azure Extension
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      dependsOn:
+        - DevHome
+      directives:
+        description: Install DevHome Azure Extension
+        allowPrerelease: true
+      settings:
+        id: 9MV8F79FGXTR
+    ### Install Powershell
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Powershell
+        allowPrerelease: true
+      settings:
+        id: Microsoft.PowerShell
+    ########################################
+    ### Configure settings
+    ########################################
+    ### Install Edge
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: edge
+      directives:
+        description: Install Edge
+      settings:
+        id: Microsoft.Edge
+    ### Install 1Password App
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: 1password
+      directives:
+        description: Install 1Password
+      settings:
+        id: AgileBits.1Password
+    ### Install Edge Extension: 1Password
+    ### -------------------------------------
+    - resource: PSDscResources/Registry
+      id: 1password-extension
+      dependsOn:
+        - edge
+      directives:
+        description: Install 1Password
+      settings:
+         Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\dppgmdbiimibapkepcbdbmkaabgiofem
+         ValueName: update_url
+         ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
+  
