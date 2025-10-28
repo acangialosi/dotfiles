@@ -25,6 +25,46 @@ properties:
         allowPrerelease: true
       settings:
         id: Microsoft.PowerShell
+    ### Install WindowsTerminal
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install WindowsTerminal
+        allowPrerelease: true
+      settings:
+        id: Microsoft.WindowsTerminal
+    ### Install DSC
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install DSC
+        allowPrerelease: true
+      settings:
+        id: Microsoft.DSC
+    ### Install Git
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Git
+        allowPrerelease: true
+      settings:
+        id: git.git
+    ### Install NodeJS
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install NodeJS
+        allowPrerelease: true
+      settings:
+        id: openjs.nodejs
+    ### Install VS Code Insiders
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install VS Code Insiders
+        allowPrerelease: true
+      settings:
+        id: Microsoft.VisualStudioCode.Insiders
     ########################################
     ### Configure settings
     ########################################
