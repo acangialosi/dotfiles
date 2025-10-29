@@ -68,14 +68,6 @@ properties:
     ########################################
     ### Configure settings
     ########################################
-    ### Install Edge
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: edge
-      directives:
-        description: Install Edge
-      settings:
-        id: Microsoft.Edge
     ### Install 1Password App
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
