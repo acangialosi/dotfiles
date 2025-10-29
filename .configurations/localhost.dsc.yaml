@@ -45,11 +45,36 @@ properties:
     ### Install Git
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: git
       directives:
         description: Install Git
         allowPrerelease: true
       settings:
         id: git.git
+    ### WORKAROUND: GitDsc/GitConfigUserName not working right now.
+    ### Git Configure Name
+    ### -------------------------------------
+    - resource: PSDscResources/Script
+      dependsOn:
+        - git
+      directives:
+        description: Configure Git to use Default WAM account
+      settings:
+        SetScript: |
+          git config --global user.name "Anthony Cangialosi [MS]"
+        GetScript: return $false
+        TestScript: return $false
+    ### Git Configure Email
+    ### -------------------------------------
+    - resource: GitDsc/GitConfigUserEmail
+      directives:
+        description: Configure Git
+        allowPrerelease: true
+      dependsOn:
+        - git
+      settings:
+         UserEmail: "5457010+acangialosi@users.noreply.github.com"
+         ConfigLocation: "Global"
     ### Install NodeJS
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -81,8 +106,6 @@ properties:
     ### -------------------------------------
     - resource: PSDscResources/Registry
       id: 1password-extension
-      dependsOn:
-        - edge
       directives:
         description: Install 1Password
       settings:
