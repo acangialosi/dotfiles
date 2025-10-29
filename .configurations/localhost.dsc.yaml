@@ -5,15 +5,16 @@ properties:
     ########################################
     ### Initialization
     ########################################
-    ### Set theme to Dark
-    ### -------------------------------------
-    - resource: Microsoft.Windows.Developer/EnableDarkMode
+     ### Show file extensions and hidden files
+     ### -------------------------------------
+    - resource: Microsoft.Windows.Developer/WindowsExplorer
       directives:
-        description: Set theme to Dark
+        description: Show File Extensions and hidden files
         allowPrerelease: true
       settings:
-        Ensure: Present
-        RestartExplorer: true
+        FileExtensions: Show
+        HiddenFiles: Show
+        
     ########################################
     ### Install CLIs, SDKs & Tools
     ########################################
