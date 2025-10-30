@@ -8,6 +8,7 @@ properties:
      ### Show file extensions and hidden files
      ### -------------------------------------
     - resource: Microsoft.Windows.Developer/WindowsExplorer
+      id: Hidden-Files
       directives:
         description: Show File Extensions and hidden files
         allowPrerelease: true
@@ -21,6 +22,7 @@ properties:
     ### Install Powershell
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Powershell
       directives:
         description: Install Powershell
         allowPrerelease: true
@@ -29,6 +31,7 @@ properties:
     ### Install WindowsTerminal
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: WindowsTerminal
       directives:
         description: Install WindowsTerminal
         allowPrerelease: true
@@ -37,6 +40,7 @@ properties:
     ### Install DSC
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: DSC
       directives:
         description: Install DSC
         allowPrerelease: true
@@ -51,33 +55,23 @@ properties:
         allowPrerelease: true
       settings:
         id: git.git
-    ### WORKAROUND: GitDsc/GitConfigUserName not working right now.
-    ### Git Configure Name
-    ### -------------------------------------
-    - resource: PSDscResources/Script
-      dependsOn:
-        - git
-      directives:
-        description: Configure Git to use Default WAM account
-      settings:
-        SetScript: |
-          git config --global user.name "Anthony Cangialosi [MS]"
-        GetScript: return $false
-        TestScript: return $false
-    ### Git Configure Email
+    ### Git Configure 
     ### -------------------------------------
     - resource: GitDsc/GitConfigUserEmail
+      id: git-config
       directives:
         description: Configure Git
         allowPrerelease: true
       dependsOn:
         - git
       settings:
+         UserName: "Anthony Cangialosi [MS]"
          UserEmail: "5457010+acangialosi@users.noreply.github.com"
          ConfigLocation: "Global"
     ### Install NodeJS
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: NodeJS
       directives:
         description: Install NodeJS
         allowPrerelease: true
@@ -86,6 +80,7 @@ properties:
     ### Install VS Code Insiders
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: VSCode
       directives:
         description: Install VS Code Insiders
         allowPrerelease: true
@@ -94,7 +89,7 @@ properties:
     ### Install 1Password App
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: 1password
+      id: 1Password
       directives:
         description: Install 1Password
       settings:
