@@ -8,7 +8,7 @@ properties:
      ### Show file extensions and hidden files
      ### -------------------------------------
     - resource: Microsoft.Windows.Developer/WindowsExplorer
-      id: Hidden-Files
+      id: Config-FileExplorer
       directives:
         description: Show File Extensions and hidden files
         allowPrerelease: true
