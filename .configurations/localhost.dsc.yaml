@@ -55,19 +55,19 @@ properties:
         allowPrerelease: true
       settings:
         id: git.git
-    ### Git Configure 
+    ### Git Configure
     ### -------------------------------------
-    - resource: GitDsc/GitConfigUserEmail
-      id: git-config
-      directives:
-        description: Configure Git
-        allowPrerelease: true
+    - resource: PSDscResources/Script
       dependsOn:
         - git
+      directives:
+        description: Configure Git to use Default WAM account
       settings:
-         UserName: "Anthony Cangialosi [MS]"
-         UserEmail: "5457010+acangialosi@users.noreply.github.com"
-         ConfigLocation: "Global"
+        SetScript: |
+          git config --global user.name "Anthony Cangialosi [MS]"
+          git config --global user.email "5457010+acangialosi@users.noreply.github.com"
+        GetScript: return $false
+        TestScript: return $false
     ### Install NodeJS
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
