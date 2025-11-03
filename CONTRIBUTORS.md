@@ -8,10 +8,9 @@ This file lists the contributors to the dotfiles repository, ranked by their con
 
 ## Contribution Statistics
 
-| Contributor | Commits | Lines Added | Lines Deleted | Total Files |
-|------------|---------|-------------|---------------|-------------|
-| Anthony Cangialosi [MS] | 1 | 1,562 | 0 | 31 |
-| copilot-swe-agent[bot] | 1 | 0 | 0 | 0 |
+| Contributor                 | Commits | Lines Added | Lines Deleted | Total Files |
+|-----------------------------|---------|-------------|---------------|-------------|
+| Anthony Cangialosi [MS]     | 1       | 1,562       | 0             | 31          |
 
 ## Detailed Breakdown
 
@@ -25,9 +24,11 @@ This file lists the contributors to the dotfiles repository, ranked by their con
   - Demo configurations (eShop)
   - Git, Edge, 1Password, and Chocolatey configurations
 
-### copilot-swe-agent[bot]
-- **Commits**: 1
-- **Impact**: Planning and automation assistance
+## Automated Contributors
+
+| Bot Account              | Commits | Impact                          |
+|--------------------------|---------|----------------------------------|
+| copilot-swe-agent[bot]   | 1       | Planning and automation         |
 
 ---
 
