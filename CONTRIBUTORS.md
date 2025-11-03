@@ -16,7 +16,6 @@ This file lists the contributors to the dotfiles repository, ranked by their con
 ## Detailed Breakdown
 
 ### Anthony Cangialosi [MS]
-- **Email**: 5457010+acangialosi@users.noreply.github.com
 - **Commits**: 1
 - **Impact**: Created the initial repository structure with comprehensive DSC configurations for Windows development environments, including:
   - Visual Studio configurations and extensions
@@ -27,10 +26,11 @@ This file lists the contributors to the dotfiles repository, ranked by their con
   - Git, Edge, 1Password, and Chocolatey configurations
 
 ### copilot-swe-agent[bot]
-- **Email**: 198982749+Copilot@users.noreply.github.com
 - **Commits**: 1
 - **Impact**: Planning and automation assistance
 
 ---
 
 *This file was generated based on git history analysis. Last updated: 2025-11-03*
+
+To update this file, run: `git shortlog -sn --all` to see commit counts by contributor.
