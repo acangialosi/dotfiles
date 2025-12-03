@@ -78,6 +78,42 @@ properties:
         allowPrerelease: true
       settings:
         id: openjs.nodejs
+    ### Install Python
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Python
+      directives:
+        description: Install Python
+        allowPrerelease: true
+      settings:
+        id: Python.Python.3.14
+    ### Install Github CLI
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: GithubCLI
+      directives:
+        description: Install Github CLI
+        allowPrerelease: true
+      settings:
+        id: GitHub.cli
+    ### Install Azure CLI
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: AzCLI
+      directives:
+        description: Install Azure CLI
+        allowPrerelease: true
+      settings:
+        id: Microsoft.AzureCLI 
+    ### Install Azd
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Azd
+      directives:
+        description: Install Azd
+        allowPrerelease: true
+      settings:
+        id: Microsoft.Azd
     ### Install VS Code Insiders
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
