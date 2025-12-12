@@ -69,6 +69,15 @@ properties:
           git config --global user.email "5457010+acangialosi@users.noreply.github.com"
         GetScript: return $false
         TestScript: return $false
+    ### Install DotNet
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: dotnet
+      directives:
+        description: Install .NET
+        allowPrerelease: true
+      settings:
+        id: microsoft.dotnet.sdk.10
     ### Install NodeJS
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
