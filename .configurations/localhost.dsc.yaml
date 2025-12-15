@@ -69,15 +69,6 @@ properties:
           git config --global user.email "5457010+acangialosi@users.noreply.github.com"
         GetScript: return $false
         TestScript: return $false
-    ### Install DotNet
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: dotnet
-      directives:
-        description: Install .NET
-        allowPrerelease: true
-      settings:
-        id: microsoft.dotnet.sdk.10
     ### Install NodeJS
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -96,6 +87,15 @@ properties:
         allowPrerelease: true
       settings:
         id: Python.Python.3.14
+    ### Install DotNet
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: dotnet
+      directives:
+        description: Install .NET
+        allowPrerelease: true
+      settings:
+        id: microsoft.dotnet.sdk.10
     ### Install Github CLI
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -105,6 +105,24 @@ properties:
         allowPrerelease: true
       settings:
         id: GitHub.cli
+    ### Install Codex
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Codex
+      directives:
+        description: Install OpenAI Codex
+        allowPrerelease: true
+      settings:
+        id: OpenAI.Codex
+    ### Install Claude Code
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Claude
+      directives:
+        description: Install Anthropic Claude Code
+        allowPrerelease: true
+      settings:
+        id: Anthropic.ClaudeCode
     ### Install Azure CLI
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
