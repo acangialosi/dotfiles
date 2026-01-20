@@ -105,15 +105,6 @@ properties:
         allowPrerelease: true
       settings:
         id: GitHub.cli
-    ### Install Codex
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: Codex
-      directives:
-        description: Install OpenAI Codex
-        allowPrerelease: true
-      settings:
-        id: OpenAI.Codex
     ### Install Claude Code
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
