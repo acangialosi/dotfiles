@@ -19,6 +19,24 @@ properties:
     ########################################
     ### Install CLIs, SDKs & Tools
     ########################################
+    ### Install 1Password App
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: 1Password
+      directives:
+        description: Install 1Password
+      settings:
+        id: AgileBits.1Password
+    ### Install Edge Extension: 1Password
+    ### -------------------------------------
+    - resource: PSDscResources/Registry
+      id: 1password-extension
+      directives:
+        description: Install 1Password
+      settings:
+         Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\dppgmdbiimibapkepcbdbmkaabgiofem
+         ValueName: update_url
+         ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
     ### Install Powershell
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -141,24 +159,6 @@ properties:
         allowPrerelease: true
       settings:
         id: Microsoft.VisualStudioCode.Insiders
-    ### Install 1Password App
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: 1Password
-      directives:
-        description: Install 1Password
-      settings:
-        id: AgileBits.1Password
-    ### Install Edge Extension: 1Password
-    ### -------------------------------------
-    - resource: PSDscResources/Registry
-      id: 1password-extension
-      directives:
-        description: Install 1Password
-      settings:
-         Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\dppgmdbiimibapkepcbdbmkaabgiofem
-         ValueName: update_url
-         ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
         description: Install ChatGPT
