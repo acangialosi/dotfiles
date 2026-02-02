@@ -159,7 +159,10 @@ properties:
         allowPrerelease: true
       settings:
         id: Microsoft.VisualStudioCode.Insiders
+    ### Install ChatGPT
+    ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: ChatGPT
       directives:
         description: Install ChatGPT
         allowPrerelease: true
