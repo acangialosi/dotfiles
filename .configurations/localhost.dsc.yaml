@@ -1,174 +1,136 @@
-# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
-properties:
-  configurationVersion: 0.2.0
-  resources:
-    ########################################
-    ### Initialization
-    ########################################
-     ### Show file extensions and hidden files
-     ### -------------------------------------
-    - resource: Microsoft.Windows.Developer/WindowsExplorer
-      id: Config-FileExplorer
-      directives:
-        description: Show File Extensions and hidden files
-        allowPrerelease: true
-      settings:
-        FileExtensions: Show
-        HiddenFiles: Show
-        
-    ########################################
-    ### Install CLIs, SDKs & Tools
-    ########################################
-    ### Install 1Password App
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: 1Password
-      directives:
-        description: Install 1Password
-      settings:
-        id: AgileBits.1Password
-    ### Install Edge Extension: 1Password
-    ### -------------------------------------
-    - resource: PSDscResources/Registry
-      id: 1password-extension
-      directives:
-        description: Install 1Password
-      settings:
-         Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\dppgmdbiimibapkepcbdbmkaabgiofem
-         ValueName: update_url
-         ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
-    ### Install Powershell
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: Powershell
-      directives:
-        description: Install Powershell
-        allowPrerelease: true
-      settings:
-        id: Microsoft.PowerShell
-    ### Install WindowsTerminal
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: WindowsTerminal
-      directives:
-        description: Install WindowsTerminal
-        allowPrerelease: true
-      settings:
-        id: Microsoft.WindowsTerminal
-    ### Install DSC
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: DSC
-      directives:
-        description: Install DSC
-        allowPrerelease: true
-      settings:
-        id: Microsoft.DSC
-    ### Install Git
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: git
-      directives:
-        description: Install Git
-        allowPrerelease: true
-      settings:
-        id: git.git
-    ### Git Configure
-    ### -------------------------------------
-    - resource: PSDscResources/Script
-      id: git-config
-      dependsOn:
-        - git
-      directives:
-        description: Configure Git to use Default WAM account
-      settings:
-        SetScript: |
-          git config --global user.name "Anthony Cangialosi [MS]"
-          git config --global user.email "5457010+acangialosi@users.noreply.github.com"
-        GetScript: return $false
-        TestScript: return $false
-    ### Install NodeJS
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: NodeJS
-      directives:
-        description: Install NodeJS
-        allowPrerelease: true
-      settings:
-        id: openjs.nodejs
-    ### Install Python
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: Python
-      directives:
-        description: Install Python
-        allowPrerelease: true
-      settings:
-        id: Python.Python.3.14
-    ### Install DotNet
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: dotnet
-      directives:
-        description: Install .NET
-        allowPrerelease: true
-      settings:
-        id: microsoft.dotnet.sdk.10
-    ### Install Github CLI
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: GithubCLI
-      directives:
-        description: Install Github CLI
-        allowPrerelease: true
-      settings:
-        id: GitHub.cli
+# yaml-language-server: $schema=https://aka.ms/dsc/schemas/v3/bundled/config/document.vscode.json
+$schema: https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2023/08/config/document.json
+resources:
+  ########################################
+  ### Initialization
+  ########################################
+  ### Show file extensions and hidden files
+  ### -------------------------------------
+  - name: Show File Extensions
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath: HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+      valueName: HideFileExt
+      valueData:
+        DWord: 0
+  - name: Show Hidden Files
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath: HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+      valueName: Hidden
+      valueData:
+        DWord: 1
+
+  ########################################
+  ### Install CLIs, SDKs & Tools
+  ########################################
+  ### Install 1Password App
+  ### -------------------------------------
+  - name: 1Password
+    type: Microsoft.WinGet/Package
+    properties:
+      id: AgileBits.1Password
+  ### Install Edge Extension: 1Password
+  ### -------------------------------------
+  - name: 1password extension
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath: HKLM\Software\Wow6432Node\Microsoft\Edge\Extensions\dppgmdbiimibapkepcbdbmkaabgiofem
+      valueName: update_url
+      valueData:
+        String: https://edge.microsoft.com/extensionwebstorebase/v1/crx
+  ### Install Powershell
+  ### -------------------------------------
+  - name: Powershell
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.PowerShell
+  ### Install WindowsTerminal
+  ### -------------------------------------
+  - name: WindowsTerminal
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.WindowsTerminal
+  ### Install DSC
+  ### -------------------------------------
+  - name: DSC
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.DSC
+  ### Install Git
+  ### -------------------------------------
+  - name: git
+    type: Microsoft.WinGet/Package
+    properties:
+      id: git.git
+  ### Git Configure
+  ### -------------------------------------
+  - name: git config
+    type: Microsoft.DSC.Transitional/RunCommandOnSet
+    dependsOn:
+      - "[resourceId('Microsoft.WinGet/Package', 'git')]"
+    properties:
+      executable: pwsh
+      arguments:
+        - -NoProfile
+        - -Command
+        - git config --global user.name "Anthony Cangialosi [MS]"; git config --global user.email "5457010+acangialosi@users.noreply.github.com"
+  ### Install NodeJS
+  ### -------------------------------------
+  - name: NodeJS
+    type: Microsoft.WinGet/Package
+    properties:
+      id: openjs.nodejs
+  ### Install Python
+  ### -------------------------------------
+  - name: Python
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Python.Python.3.14
+  ### Install DotNet
+  ### -------------------------------------
+  - name: dotnet
+    type: Microsoft.WinGet/Package
+    properties:
+      id: microsoft.dotnet.sdk.10
+  ### Install Github CLI
+  ### -------------------------------------
+  - name: GithubCLI
+    type: Microsoft.WinGet/Package
+    properties:
+      id: GitHub.cli
+  ### Install Claude Code
+  ### -------------------------------------
+  - name: Claude
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Anthropic.ClaudeCode
+  ### Install Azure CLI
+  ### -------------------------------------
+  - name: AzCLI
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.AzureCLI
+  ### Install Azd
+  ### -------------------------------------
+  - name: Azd
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.Azd
+  ### Install VS Code Insiders
+  ### -------------------------------------
+  - name: VSCode
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.VisualStudioCode.Insiders
+  ### Install ChatGPT
+  ### -------------------------------------
+  - name: ChatGPT
+    type: Microsoft.WinGet/Package
+    properties:
+      id: 9nt1r1c2hh7j
+  ########################################
+  ### Configure settings
+  ########################################
     ### Install Claude Code
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: Claude
-      directives:
-        description: Install Anthropic Claude Code
-        allowPrerelease: true
-      settings:
-        id: Anthropic.ClaudeCode
-    ### Install Azure CLI
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: AzCLI
-      directives:
-        description: Install Azure CLI
-        allowPrerelease: true
-      settings:
-        id: Microsoft.AzureCLI 
-    ### Install Azd
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: Azd
-      directives:
-        description: Install Azd
-        allowPrerelease: true
-      settings:
-        id: Microsoft.Azd
-    ### Install VS Code Insiders
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: VSCode
-      directives:
-        description: Install VS Code Insiders
-        allowPrerelease: true
-      settings:
-        id: Microsoft.VisualStudioCode.Insiders
-    ### Install ChatGPT
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: ChatGPT
-      directives:
-        description: Install ChatGPT
-        allowPrerelease: true
-      settings:
-        id: 9nt1r1c2hh7j
-    ########################################
-    ### Configure settings
-    ########################################
-  
+
