@@ -1,0 +1,121 @@
+$schema: https://aka.ms/dsc/schemas/v3/bundled/config/document.json
+resources:
+  ########################################
+  ### Initialization
+  ########################################
+
+
+  ########################################
+  ### Install Tools
+  ########################################
+  ### Install WindowsTerminal
+  ### -------------------------------------
+  - name: WindowsTerminal
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.WindowsTerminal
+      useLatest: true
+  ### Install Powershell
+  ### -------------------------------------
+  - name: Powershell
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.PowerShell
+      useLatest: true
+  ### Install DSC
+  ### -------------------------------------
+  - name: DSC
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.DSC
+      useLatest: true
+  ### Install 1Password App
+  ### -------------------------------------
+  - name: 1Password
+    type: Microsoft.WinGet/Package
+    properties:
+      id: AgileBits.1Password
+      useLatest: true
+  ### Install Git
+  ### -------------------------------------
+  - name: git
+    type: Microsoft.WinGet/Package
+    properties:
+      id: git.git
+  ### Git Configure
+  ### -------------------------------------
+  - name: git config
+    type: Microsoft.DSC.Transitional/RunCommandOnSet
+    properties:
+      executable: pwsh
+      arguments:
+        - -NoProfile
+        - -Command
+        - git config --global user.name "Anthony Cangialosi [MS]"; git config --global user.email "5457010+acangialosi@users.noreply.github.com"
+  ### Install Github CLI
+  ### -------------------------------------
+  - name: GithubCLI
+    type: Microsoft.WinGet/Package
+    properties:
+      id: GitHub.cli
+      useLatest: true
+  ### Install Claude Code
+  ### -------------------------------------
+  - name: Claude
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Anthropic.ClaudeCode
+      useLatest: true
+  ### Install VS Code Insiders
+  ### -------------------------------------
+  - name: VSCode
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.VisualStudioCode.Insiders
+      useLatest: true
+  ### Install ChatGPT
+  ### -------------------------------------
+  - name: ChatGPT
+    type: Microsoft.WinGet/Package
+    properties:
+      id: 9nt1r1c2hh7j
+      useLatest: true
+  ### Install Azure CLI
+  ### -------------------------------------
+  - name: AzCLI
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.AzureCLI
+      useLatest: true
+  ### Install Azd
+  ### -------------------------------------
+  - name: Azd
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.Azd
+      useLatest: true
+
+  ########################################
+  ### Install Runtimes & SDKs
+  ########################################
+
+
+  ########################################
+  ### Configure settings
+  ########################################
+  ### Show file extensions and hidden files
+  ### -------------------------------------
+  - name: Show File Extensions
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath: HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+      valueName: HideFileExt
+      valueData:
+        DWord: 0
+  - name: Show Hidden Files
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath: HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+      valueName: Hidden
+      valueData:
+        DWord: 1

@@ -1,0 +1,37 @@
+$schema: https://aka.ms/dsc/schemas/v3/bundled/config/document.json
+resources:
+  ########################################
+  ### Initialization
+  ########################################
+
+
+  ########################################
+  ### Install Tools
+  ########################################
+
+
+  ########################################
+  ### Install Runtimes & SDKs
+  ########################################
+  ### Install NodeJS
+  ### -------------------------------------
+  - name: NodeJS
+    type: Microsoft.WinGet/Package
+    properties:
+      id: openjs.nodejs
+  ### Install Python
+  ### -------------------------------------
+  - name: Python
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Python.Python.3.14
+  ### Install DotNet
+  ### -------------------------------------
+  - name: dotnet
+    type: Microsoft.WinGet/Package
+    properties:
+      id: microsoft.dotnet.sdk.10
+
+  ########################################
+  ### Configure settings
+  ########################################
