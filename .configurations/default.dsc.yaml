@@ -54,10 +54,17 @@ resources:
         - git config --global user.name "Anthony Cangialosi [MS]"; git config --global user.email "5457010+acangialosi@users.noreply.github.com"
   ### Install Github CLI
   ### -------------------------------------
-  - name: GithubCLI
+  - name: Github CLI
     type: Microsoft.WinGet/Package
     properties:
       id: GitHub.cli
+      useLatest: true
+  ### Install Github Copilot
+  ### -------------------------------------
+  - name: Github Copilot
+    type: Microsoft.WinGet/Package
+    properties:
+      id: GitHub.Copilot
       useLatest: true
   ### Install Claude Code
   ### -------------------------------------
