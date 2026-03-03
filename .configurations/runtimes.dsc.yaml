@@ -31,6 +31,13 @@ resources:
     type: Microsoft.WinGet/Package
     properties:
       id: microsoft.dotnet.sdk.10
+  ### Install Azd
+  ### -------------------------------------
+  - name: Azd
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.Azd
+      useLatest: true
 
   ########################################
   ### Configure settings

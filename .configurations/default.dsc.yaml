@@ -94,18 +94,21 @@ resources:
     properties:
       id: Microsoft.AzureCLI
       useLatest: true
-  ### Install Azd
-  ### -------------------------------------
-  - name: Azd
-    type: Microsoft.WinGet/Package
-    properties:
-      id: Microsoft.Azd
-      useLatest: true
-
   ########################################
   ### Install Runtimes & SDKs
   ########################################
-
+  ### Install NodeJS
+  ### -------------------------------------
+  - name: NodeJS
+    type: Microsoft.WinGet/Package
+    properties:
+      id: openjs.nodejs
+  ### Install Python
+  ### -------------------------------------
+  - name: Python
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Python.Python.3.14
 
   ########################################
   ### Configure settings
