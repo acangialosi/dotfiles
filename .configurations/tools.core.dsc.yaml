@@ -1,0 +1,77 @@
+$schema: https://aka.ms/dsc/schemas/v3/bundled/config/document.json
+resources:
+  ########################################
+  ### Install Core Tools
+  ########################################
+  ### Install Microsoft App Installer
+  ### -------------------------------------
+  - name: Microsoft App Installer
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.AppInstaller
+      source: winget
+      useLatest: true
+      acceptAgreements: true
+  ### Install Windows Terminal
+  ### -------------------------------------
+  - name: Windows Terminal
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.WindowsTerminal
+      source: winget
+      useLatest: true
+      acceptAgreements: true
+  ### Install PowerShell
+  ### -------------------------------------
+  - name: PowerShell
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.PowerShell
+      source: winget
+      useLatest: true
+      acceptAgreements: true
+  ### Install DSC
+  ### -------------------------------------
+  - name: DSC
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.DSC
+      source: winget
+      useLatest: true
+      acceptAgreements: true
+  ### Install 1Password
+  ### -------------------------------------
+  - name: 1Password
+    type: Microsoft.WinGet/Package
+    properties:
+      id: AgileBits.1Password
+      source: winget
+      useLatest: true
+      acceptAgreements: true
+  ### Install Git
+  ### -------------------------------------
+  - name: Git
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Git.Git
+      source: winget
+      useLatest: true
+      acceptAgreements: true
+  ### Install GitHub Copilot
+  ### -------------------------------------
+  - name: GitHub Copilot
+    type: Microsoft.WinGet/Package
+    properties:
+      id: GitHub.Copilot
+      source: winget
+      useLatest: false
+      acceptAgreements: true
+  ### Install VS Code Insiders
+  ### -------------------------------------
+  - name: VS Code Insiders
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.VisualStudioCode.Insiders
+      source: winget
+      useLatest: true
+      acceptAgreements: true

@@ -1,0 +1,41 @@
+$schema: https://aka.ms/dsc/schemas/v3/bundled/config/document.json
+resources:
+  ########################################
+  ### Install Extended Tools
+  ########################################
+  ### Install GitHub CLI
+  ### -------------------------------------
+  - name: GitHub CLI
+    type: Microsoft.WinGet/Package
+    properties:
+      id: GitHub.cli
+      source: winget
+      useLatest: true
+      acceptAgreements: true
+  ### Install Claude Code
+  ### -------------------------------------
+  - name: Claude Code
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Anthropic.ClaudeCode
+      source: winget
+      useLatest: true
+      acceptAgreements: true
+  ### Install Claude Desktop
+  ### -------------------------------------
+  - name: Claude
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Anthropic.Claude
+      source: winget
+      useLatest: true
+      acceptAgreements: true
+  ### Install Azure CLI
+  ### -------------------------------------
+  - name: Azure CLI
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.AzureCLI
+      source: winget
+      useLatest: true
+      acceptAgreements: true

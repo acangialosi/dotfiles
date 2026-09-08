@@ -1,0 +1,44 @@
+$schema: https://aka.ms/dsc/schemas/v3/bundled/config/document.json
+resources:
+  ########################################
+  ### Configure Core Settings
+  ########################################
+  ### Show file extensions and hidden files
+  ### -------------------------------------
+  - name: Show File Extensions
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath: HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+      valueName: HideFileExt
+      valueData:
+        DWord: 0
+  - name: Show Hidden Files
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath: HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+      valueName: Hidden
+      valueData:
+        DWord: 1
+  ### Set time and time zone automatically
+  ### -------------------------------------
+  - name: Enable Automatic Time
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath: HKLM\SYSTEM\CurrentControlSet\Services\W32Time
+      valueName: Start
+      valueData:
+        DWord: 3
+  - name: Enable Automatic Time Zone
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath: HKLM\SYSTEM\CurrentControlSet\Services\tzautoupdate
+      valueName: Start
+      valueData:
+        DWord: 3
+  - name: Enable Location for Automatic Time Zone
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath: HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location
+      valueName: Value
+      valueData:
+        String: Allow

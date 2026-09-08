@@ -1,23 +1,23 @@
 $schema: https://aka.ms/dsc/schemas/v3/bundled/config/document.json
 resources:
   ########################################
-  ### Install Runtimes & SDKs
+  ### Install Core Runtimes
   ########################################
-  ### Install DotNet
+  ### Install Node.js
   ### -------------------------------------
-  - name: .NET SDK
+  - name: Node.js
     type: Microsoft.WinGet/Package
     properties:
-      id: Microsoft.DotNet.SDK.10
+      id: OpenJS.NodeJS
       source: winget
       useLatest: true
       acceptAgreements: true
-  ### Install Azd
+  ### Install Python
   ### -------------------------------------
-  - name: Azd
+  - name: Python
     type: Microsoft.WinGet/Package
     properties:
-      id: Microsoft.Azd
+      id: Python.Python.3.14
       source: winget
       useLatest: true
       acceptAgreements: true
