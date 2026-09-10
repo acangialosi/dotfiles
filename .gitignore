@@ -1,0 +1,13 @@
+# AI tool configuration that is private or machine-specific
+ai/local/
+ai/**/*.local.json
+ai/**/CLAUDE.local.md
+ai/**/.env
+ai/**/.env.*
+!ai/**/.env.example
+
+# Generated AI tool state
+ai/**/cache/
+ai/**/history/
+ai/**/credentials.*
+ai/**/secrets.*

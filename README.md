@@ -62,6 +62,10 @@ helper, or GitHub account. Configure identity per repository or with Git
 - `visualstudio\extensions\extensions.vsconfig` contains the Visual Studio
   extension selection.
 - `visualstudio\settings\devbox` contains Visual Studio unified settings.
+- `ai` contains portable personal instructions, settings, and Agent Skills for
+  Claude. Run `.\ai\install.ps1 -WhatIf` to preview installation, then
+  `.\ai\install.ps1` to copy configured files into the current user's Claude
+  directory. See `ai\README.md` for the layout and local override conventions.
 
 Review configuration changes before applying them. Machine setup must not
 format disks, force a reboot, or select a GitHub account automatically.
