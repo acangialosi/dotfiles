@@ -57,6 +57,15 @@ resources:
       source: winget
       useLatest: true
       acceptAgreements: true
+  ### Install GitHub CLI
+  ### -------------------------------------
+  - name: GitHub CLI
+    type: Microsoft.WinGet/Package
+    properties:
+      id: GitHub.cli
+      source: winget
+      useLatest: true
+      acceptAgreements: true
   ### Install GitHub Copilot
   ### -------------------------------------
   - name: GitHub Copilot
