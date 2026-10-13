@@ -21,7 +21,8 @@ installers; VS Code itself remains unelevated.
 ## Configurations
 
 - `settings.core.dsc.yaml` configures safe Windows Explorer preferences and
-  automatic time and time-zone detection.
+  automatic time and time-zone detection, and sets Google as Edge's default
+  search engine.
 - `tools.core.dsc.yaml` installs Microsoft App Installer, Windows Terminal,
   PowerShell, DSC, 1Password, the official Git for Windows distribution,
   GitHub Copilot, and VS Code Insiders.

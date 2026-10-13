@@ -42,3 +42,26 @@ resources:
       valueName: Value
       valueData:
         String: Allow
+  ### Set Edge default search engine to Google
+  ### -------------------------------------
+  - name: Enable Edge Default Search Provider Policy
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath: HKLM\SOFTWARE\Policies\Microsoft\Edge
+      valueName: DefaultSearchProviderEnabled
+      valueData:
+        DWord: 1
+  - name: Set Edge Default Search Provider Name
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath: HKLM\SOFTWARE\Policies\Microsoft\Edge
+      valueName: DefaultSearchProviderName
+      valueData:
+        String: Google
+  - name: Set Edge Default Search Provider URL
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath: HKLM\SOFTWARE\Policies\Microsoft\Edge
+      valueName: DefaultSearchProviderSearchURL
+      valueData:
+        String: https://www.google.com/search?q={searchTerms}
