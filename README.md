@@ -25,14 +25,49 @@ installers; VS Code itself remains unelevated.
   search engine.
 - `tools.core.dsc.yaml` installs Microsoft App Installer, Windows Terminal,
   PowerShell, DSC, 1Password, the official Git for Windows distribution,
-  GitHub Copilot, and VS Code Insiders.
-- `tools.extended.dsc.yaml` installs GitHub CLI, Claude Code, Claude Desktop,
-  and Azure CLI.
+  GitHub CLI, GitHub Copilot, and VS Code Insiders.
+- `tools.extended.dsc.yaml` installs Claude Code, Claude Desktop, and Azure CLI.
 - `runtimes.core.dsc.yaml` installs Node.js and Python.
 - `default.dsc.yaml` includes the core tools, extended tools, core runtimes, and
   core settings.
-- `runtimes.dsc.yaml` can be applied separately to install the optional .NET SDK
-  and Azure Developer CLI.
+- `runtimes.dsc.extended.yaml` can be applied separately to install the optional
+  .NET SDK and Azure Developer CLI.
+
+## Default setup inventory
+
+Keep this list in sync with `.configurations` whenever a package or setting is
+added, changed, or removed.
+
+### Installed (applied by `default.dsc.yaml`)
+
+| Name | WinGet ID | Configuration |
+|------|-----------|---------------|
+| Microsoft App Installer | `Microsoft.AppInstaller` | `tools.core` |
+| Windows Terminal | `Microsoft.WindowsTerminal` | `tools.core` |
+| PowerShell | `Microsoft.PowerShell` | `tools.core` |
+| DSC | `Microsoft.DSC` | `tools.core` |
+| 1Password | `AgileBits.1Password` | `tools.core` |
+| Git for Windows | `Git.Git` | `tools.core` |
+| GitHub CLI | `GitHub.cli` | `tools.core` |
+| GitHub Copilot | `GitHub.Copilot` | `tools.core` |
+| VS Code Insiders | `Microsoft.VisualStudioCode.Insiders` | `tools.core` |
+| Claude Code | `Anthropic.ClaudeCode` | `tools.extended` |
+| Claude Desktop | `Anthropic.Claude` | `tools.extended` |
+| Azure CLI | `Microsoft.AzureCLI` | `tools.extended` |
+| Node.js | `OpenJS.NodeJS` | `runtimes.core` |
+| Python 3.14 | `Python.Python.3.14` | `runtimes.core` |
+
+### Configured (`settings.core.dsc.yaml`)
+
+- Windows Explorer shows file extensions and hidden files.
+- Automatic time, automatic time zone, and location access for time zone
+  detection are enabled.
+- Microsoft Edge default search engine is Google (machine policy).
+
+### Optional (not applied by default)
+
+- .NET SDK 10 (`Microsoft.DotNet.SDK.10`) and Azure Developer CLI
+  (`Microsoft.Azd`) via `runtimes.dsc.extended.yaml`.
 
 If the Microsoft VFS/Scalar Git distribution is already installed, remove it
 before setup so the official Git for Windows installer can proceed:
