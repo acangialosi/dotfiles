@@ -35,10 +35,9 @@ installers; VS Code itself remains unelevated.
 
 ## Default setup inventory
 
-Keep this list in sync with `.configurations` whenever a package or setting is
-added, changed, or removed.
+Running `setup.ps1` makes exactly these changes to the machine.
 
-### Installed (applied by `default.dsc.yaml`)
+### Tools installed (WinGet)
 
 | Name | WinGet ID | Configuration |
 |------|-----------|---------------|
@@ -54,20 +53,36 @@ added, changed, or removed.
 | Claude Code | `Anthropic.ClaudeCode` | `tools.extended` |
 | Claude Desktop | `Anthropic.Claude` | `tools.extended` |
 | Azure CLI | `Microsoft.AzureCLI` | `tools.extended` |
+
+### Runtimes installed (WinGet, latest version)
+
+| Name | WinGet ID | Configuration |
+|------|-----------|---------------|
 | Node.js | `OpenJS.NodeJS` | `runtimes.core` |
 | Python 3.14 | `Python.Python.3.14` | `runtimes.core` |
 
-### Configured (`settings.core.dsc.yaml`)
+### Settings changed (`settings.core.dsc.yaml`, Windows registry)
 
-- Windows Explorer shows file extensions and hidden files.
-- Automatic time, automatic time zone, and location access for time zone
-  detection are enabled.
-- Microsoft Edge default search engine is Google (machine policy).
+| Setting | Registry key | Value | Data |
+|---------|--------------|-------|------|
+| Show file extensions | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `HideFileExt` | `0` (DWord) |
+| Show hidden files | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `Hidden` | `1` (DWord) |
+| Automatic time | `HKLM\SYSTEM\CurrentControlSet\Services\W32Time` | `Start` | `3` (DWord) |
+| Automatic time zone | `HKLM\SYSTEM\CurrentControlSet\Services\tzautoupdate` | `Start` | `3` (DWord) |
+| Allow location for time zone | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location` | `Value` | `Allow` (String) |
+| Edge: enable default search policy | `HKLM\SOFTWARE\Policies\Microsoft\Edge` | `DefaultSearchProviderEnabled` | `1` (DWord) |
+| Edge: default search name | `HKLM\SOFTWARE\Policies\Microsoft\Edge` | `DefaultSearchProviderName` | `Google` (String) |
+| Edge: default search URL | `HKLM\SOFTWARE\Policies\Microsoft\Edge` | `DefaultSearchProviderSearchURL` | `https://www.google.com/search?q={searchTerms}` (String) |
+
+The Edge values are machine policy, so Edge shows its search engine setting as
+managed by your organization.
 
 ### Optional (not applied by default)
 
-- .NET SDK 10 (`Microsoft.DotNet.SDK.10`) and Azure Developer CLI
-  (`Microsoft.Azd`) via `runtimes.dsc.extended.yaml`.
+| Name | WinGet ID | Configuration |
+|------|-----------|---------------|
+| .NET SDK 10 | `Microsoft.DotNet.SDK.10` | `runtimes.dsc.extended.yaml` |
+| Azure Developer CLI | `Microsoft.Azd` | `runtimes.dsc.extended.yaml` |
 
 If the Microsoft VFS/Scalar Git distribution is already installed, remove it
 before setup so the official Git for Windows installer can proceed:
