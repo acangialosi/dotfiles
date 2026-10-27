@@ -5,6 +5,9 @@ param(
 
     [string]$HomePath = $HOME,
 
+    [ValidateSet('Claude', 'Copilot', 'All')]
+    [string]$Tool = 'Claude',
+
     [switch]$Force
 )
 
@@ -133,8 +136,12 @@ function Install-Item {
 }
 
 function Get-SkillSources {
+    param(
+        [Parameter(Mandatory)]
+        [string]$SourceRoot
+    )
+
     $skills = @{}
-    $sourceRoot = Join-Path $aiRoot 'claude\skills'
 
     foreach ($directory in Get-ChildItem -LiteralPath $sourceRoot -Directory) {
         if (Test-Path -LiteralPath (Join-Path $directory.FullName 'SKILL.md')) {
@@ -148,10 +155,13 @@ function Get-SkillSources {
 function Install-Skills {
     param(
         [Parameter(Mandatory)]
+        [string]$SourceRoot,
+
+        [Parameter(Mandatory)]
         [string]$DestinationRoot
     )
 
-    $skills = Get-SkillSources
+    $skills = Get-SkillSources -SourceRoot $SourceRoot
     foreach ($name in ($skills.Keys | Sort-Object)) {
         Install-Item -Source $skills[$name] -Destination (Join-Path $DestinationRoot $name)
     }
@@ -248,12 +258,22 @@ function Install-ClaudeSettings {
     Write-Host "Merged Claude settings into '$destination'."
 }
 
-$claudeRoot = Join-Path $HomePath '.claude'
+if ($Tool -in @('Claude', 'All')) {
+    $claudeRoot = Join-Path $HomePath '.claude'
 
-Install-Skills -DestinationRoot (Join-Path $claudeRoot 'skills')
+    Install-Skills `
+        -SourceRoot (Join-Path $aiRoot 'claude\skills') `
+        -DestinationRoot (Join-Path $claudeRoot 'skills')
 
-Install-Item `
-    -Source (Join-Path $aiRoot 'claude\CLAUDE.md') `
-    -Destination (Join-Path $claudeRoot 'CLAUDE.md')
+    Install-Item `
+        -Source (Join-Path $aiRoot 'claude\CLAUDE.md') `
+        -Destination (Join-Path $claudeRoot 'CLAUDE.md')
 
-Install-ClaudeSettings
+    Install-ClaudeSettings
+}
+
+if ($Tool -in @('Copilot', 'All')) {
+    Install-Skills `
+        -SourceRoot (Join-Path $aiRoot 'copilot\skills') `
+        -DestinationRoot (Join-Path $HomePath '.copilot\skills')
+}
