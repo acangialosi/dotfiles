@@ -83,6 +83,7 @@ New sessions discover the installed personal skill automatically.
 /human learn --source "C:\path\my-writing.docx" --channel document
 /human learn --source https://example.com/my-article --channel document
 /human learn --channel email --source <paste your own text>
+/human reset
 /human typos --channel teams Rewrite: <draft>
 ```
 
@@ -92,12 +93,23 @@ sampled contributions can be confidently attributed to you. Supplied sources
 are used without expanding to mailbox searches. Microsoft 365 discovery
 requires separately configured, authorized tools such as WorkIQ.
 
+Learning also screens samples for possible AI-generated wording, even when sent
+by you. Confirmed generated text is excluded; questionable samples are held out
+for your review. Style clues are not proof of AI authorship, and no third-party
+detector is used. Mixed drafts contribute only clearly identified wording you
+personally composed or substantially rewrote.
+
 The approved profile lives at `%USERPROFILE%\.copilot\human\style.md`, outside
 this public repository and outside the installed skill. The installer neither
 creates nor overwrites it. Until learning is approved, the skill reports that
 the profile is unlearned rather than inventing your voice. Backups and profiles
 are private local files; review them before sharing. Only the reusable workflow
 and an unlearned template are tracked here.
+
+`/human reset` asks for confirmation, then deletes only the active local
+`style.md` and returns the skill to an unlearned state. It does not remove
+existing backups, source material, conversation history, or profiles on other
+machines. Adding or installing the reset mode does not itself clear a profile.
 
 Typo mode is opt-in, takes no count argument, and distributes inconsequential
 imperfections according to content length: roughly one per 200 words of eligible
